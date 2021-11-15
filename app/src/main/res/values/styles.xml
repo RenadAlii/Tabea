@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TextView style for a Task Title -->
+    <style name="Widget.Tabea.TextView.taskTitle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <!-- check Button style -->
+    <style name="Widget.tabea.CompoundButton.CheckButton"
+        parent="">
+        <item name="android:paddingEnd">@dimen/check_button_padding</item>
+        <item name="android:paddingStart">@dimen/check_button_padding</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+    </style>
+
+    <!-- Divider style -->
+    <style name="Widget.Todo.Divider" parent="">
+        <item name="android:background">?attr/dividerHorizontal</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

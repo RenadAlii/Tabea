@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/background_card_2"
+    android:layout_marginTop="3dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/todocheckbox"
+            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:checkable="true"
+            android:text="go to the moll"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ellipsisImageButton"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="370dp"
+        android:layout_marginLeft="94dp"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:src="@drawable/ellipsis__1_"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</com.google.android.material.card.MaterialCardView>

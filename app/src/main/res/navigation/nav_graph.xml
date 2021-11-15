@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/theListOfTodoFragment">
+
+    <fragment
+        android:id="@+id/theListOfTodoFragment"
+        android:name="com.example.tabea.TheListOfTodoFragment"
+        android:label="TheListOfTodoFragment" >
+        <action
+            android:id="@+id/action_theListOfTodoFragment_to_newTodoFragment"
+            app:destination="@id/newTodoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newTodoFragment"
+        android:name="com.example.tabea.NewTodoFragment"
+        android:label="fragment_new_todo"
+        tools:layout="@layout/fragment_new_todo" />
+</navigation>

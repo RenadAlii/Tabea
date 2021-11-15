@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+    <dimen name="image_size">300dp</dimen>
+    <dimen name="button_width">250dp</dimen>
+    <dimen name="side_margin">16dp</dimen>
+    <dimen name="margin_between_elements">8dp</dimen>
+    <dimen name="check_button_padding">8dp</dimen>
+    <dimen name="margin">4dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+</resources>
+
+
