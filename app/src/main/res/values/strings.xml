@@ -1,14 +1,29 @@
 <resources>
     <string name="app_name">Tabea</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_editTodo">Edit</string>
     <string name="menu_deleteTodo">Delete</string>
     <string name="new_task">New Task</string>
     <string name="todo">Todo</string>
     <string name="description">Description</string>
+    <string name="time">%1$s:%2$s</string>
     <string name="add_task">Add Task</string>
     <string name="edit_task">Edit Task</string>
     <string name="edit">Edit</string>
     <string name="add">Add</string>
+    <string name="yes">YES</string>
+    <string name="open">Open</string>
+    <string name="closed">Closed</string>
+    <string name="cancel">CANCEL</string>
+    <string name="deleteTask">Delete All Task</string>
+    <string name="clearTasksDialogMsg">Do You Really want To Delete All Tasks ? </string>
+    <string name="delete_all_task">Delete all Task</string>
+    <string name="sort_by_asc">Sort By ASC</string>
+    <string name="sort_by_des">Sort By DES</string>
+    <string name="sort_by_date">Sort By Date</string>
+    <string name="filter">filter</string>
+    <string name="inbox">InBox</string>
+    <string name="today">Today</string>
+    <string name="completed_task">Completed Task</string>
+    <string name="won_t_do">won\'t Do</string>
 </resources>

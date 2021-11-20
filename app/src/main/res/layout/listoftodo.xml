@@ -1,47 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <com.google.android.material.card.MaterialCardView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/background_card_2"
-    android:layout_marginTop="3dp"
+    android:id="@+id/card"
+    style="@style/card_view_style"
+    android:layout_marginTop="4dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
     app:cardElevation="1dp"
     app:cardCornerRadius="0dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="146dp"
-        android:layout_height="wrap_content">
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/todocheckbox"
-            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:checkable="true"
-            android:text="go to the moll"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/todocheckbox"
+                style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="4dp"
+                android:checkable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/todoTaskText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="renaaaaaaaaaaaaaaaaaaaaad"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/todocheckbox"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="30dp"
+                tools:layout_editor_absoluteY="16dp">
+
+            </com.google.android.material.textview.MaterialTextView>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ellipsisImageButton"
         android:layout_width="30dp"
         android:layout_height="20dp"
-        android:layout_marginStart="370dp"
-        android:layout_marginLeft="94dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:src="@drawable/ellipsis__1_"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+</androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        </LinearLayout>
+        <View
+            android:id="@+id/divider"
+            style="@style/Widget.Todo.Divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/side_margin"
+            android:layout_marginBottom="5dp" />
+        <ImageView
+            android:id="@+id/expand"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:visibility="visible"
+            android:src="@drawable/down"/>
+    <LinearLayout
+        android:id="@+id/layout_expand"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/detailsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:textSize="15dp"
+            android:textColor="@color/darkGray"
+            android:labelFor="@+id/details"
+            android:textStyle="bold"
+            android:text="Details:"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"/>
+<com.google.android.material.textview.MaterialTextView
+    android:id="@+id/details"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="35dp"
+    android:textSize="20dp"
+    android:textColor="@color/lightGray"
+    android:text="@string/app_name"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="16dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dateText"
+                android:text="17/30/2021"
+                android:textSize="12dp"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/oval_button" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/timeText"
+                android:text="17/30/2021"
+                android:textSize="12dp"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/oval_button" />
+
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/hide"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/up"/>
+        </LinearLayout>
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
