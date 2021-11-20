@@ -3,16 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/drawable/oval_button.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_choice_todo_list_type.xml" value="0.2" />
-        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_edit_todo.xml" value="0.2" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_completed_task.xml" value="0.1" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_edit_todo.xml" value="0.1" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_in_box.xml" value="0.2" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_item_list.xml" value="0.1859375" />
-        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_new_todo.xml" value="0.1" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_new_todo.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_the_list_of_todo.xml" value="0.22" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_today_task.xml" value="0.2" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_todo_list_type.xml" value="0.2" />
-        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/listoftodo.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/fragment_wont_do.xml" value="0.2" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/listoftodo.xml" value="0.15550755939524838" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/layout/new_todo_list_item_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/menu/drawer_menu.xml" value="0.2" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/menu/menu_edit_delete_todo.xml" value="0.1" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/menu/pop_menu.xml" value="0.2" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/menu/sort__clear_menu.xml" value="0.2" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabea/app/src/main/res/menu/sort_menu.xml" value="0.2" />
       </map>
     </option>
   </component>
