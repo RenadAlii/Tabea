@@ -1,36 +1,32 @@
 package com.example.tabea.adapter
 
-import android.content.Context
-import android.view.*
-import android.widget.*
-import androidx.recyclerview.widget.RecyclerView
-import com.example.tabea.R
-import com.example.tabea.model.Todo
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Paint
 import android.os.Build
+import android.view.*
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
+import com.example.tabea.R
+import com.example.tabea.model.Todo
 import com.example.tabea.model.TodoViewModel
 import java.text.SimpleDateFormat
-
-
 
 class TodayTaskAdapter(private val context: Context, dataSet: List<Todo>) :
     RecyclerView.Adapter<TodayTaskAdapter.ItemViewHolder>() {
     val viewModel = TodoViewModel()
     private val toDoItem = dataSet.filter {
         val dateTodo = it.date
-        val sdf =  SimpleDateFormat("dd/MM/yyyy")
-        val date =  sdf.parse(dateTodo)
-        date==(viewModel.dateOfToday())
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val date = sdf.parse(dateTodo)
+        date == (viewModel.dateOfToday())
     }
 
-
-
-    //here we hold the view in listoftodo.xml
+    // here we hold the view in listoftodo.xml
     class ItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         val todoCheckBox: CheckBox = view.findViewById(R.id.todocheckbox)
@@ -45,37 +41,31 @@ class TodayTaskAdapter(private val context: Context, dataSet: List<Todo>) :
         val card: CardView = view.findViewById(R.id.card)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
             .inflate(R.layout.listoftodo, parent, false)
 
         return ItemViewHolder(adapterLayout)
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-
         val todo = toDoItem[position]
         holder.todoTask.text = todo.todoText
         holder.dateText.text = todo.date
         holder.timeText.text = todo.time
         holder.detailsText.text = todo.details
 
-
         // remove the menu
         holder.theMenu.visibility = View.GONE
         // set the CheckBox to disable to prevent any change in this fragment
         holder.todoCheckBox.isEnabled = false
 
-
-        // make Toast to 
-        //Notify the user that they cannot change anything here
+        // make Toast to
+        // Notify the user that they cannot change anything here
         holder.card.setOnClickListener {
-            Toast.makeText(context, "if you want to make any change go to InBox",Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "if you want to make any change go to InBox", Toast.LENGTH_LONG).show()
         }
         // add lineThrough TodoTask when CheckBox Checked or remove line
         holder.todoCheckBox.setOnCheckedChangeListener { _, isChecked ->
@@ -88,11 +78,7 @@ class TodayTaskAdapter(private val context: Context, dataSet: List<Todo>) :
             holder.todoCheckBox.isChecked = !holder.todoCheckBox.isChecked
         }
 
-
-
-
-
-        //expand the layout or unexpand
+        // expand the layout or unexpand
         holder.expand.setOnClickListener {
             if (holder.linearLayout.isGone) {
                 holder.linearLayout.visibility = View.VISIBLE
@@ -106,18 +92,15 @@ class TodayTaskAdapter(private val context: Context, dataSet: List<Todo>) :
                     notifyItemChanged(position)
                 }
             }
-
-
         }
-
-
     }
 
-    //fun to make LineThrough Task & disEnable CheckBox when task is completed
+    // fun to make LineThrough Task & disEnable CheckBox when task is completed
     private fun makeLineThroughTask(
-        taskTextView: TextView, isCompleted: Boolean, position: Int
+        taskTextView: TextView,
+        isCompleted: Boolean,
+        position: Int,
     ) {
-
         if (isCompleted) {
             taskTextView.paintFlags = taskTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
@@ -128,7 +111,6 @@ class TodayTaskAdapter(private val context: Context, dataSet: List<Todo>) :
             viewModel.setIsCompleted(position, false)
         }
     }
-
 
     override fun getItemCount(): Int = toDoItem.size
 }

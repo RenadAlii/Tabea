@@ -1,20 +1,19 @@
 package com.example.tabea.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.view.*
 import android.widget.*
-import androidx.recyclerview.widget.RecyclerView
-import com.example.tabea.R
-import com.example.tabea.model.Todo
-import android.annotation.SuppressLint
-import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
+import com.example.tabea.R
+import com.example.tabea.model.Todo
 import com.example.tabea.model.TodoViewModel
 import java.text.SimpleDateFormat
-
 
 class WontDoAdapter(private val context: Context, dataSet: List<Todo>) :
     RecyclerView.Adapter<WontDoAdapter.ItemViewHolder>() {
@@ -26,8 +25,7 @@ class WontDoAdapter(private val context: Context, dataSet: List<Todo>) :
         !it.isCompleted && date.before(viewModel.dateOfToday())
     }
 
-
-    //here we hold the view in listoftodo.xml
+    // here we hold the view in listoftodo.xml
     class ItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         val todoCheckBox: CheckBox = view.findViewById(R.id.todocheckbox)
@@ -42,20 +40,16 @@ class WontDoAdapter(private val context: Context, dataSet: List<Todo>) :
         val card: CardView = view.findViewById(R.id.card)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
             .inflate(R.layout.listoftodo, parent, false)
 
         return ItemViewHolder(adapterLayout)
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-
         val todo = toDoItem[position]
         holder.todoTask.text = todo.todoText
         holder.dateText.text = todo.date
@@ -83,19 +77,18 @@ class WontDoAdapter(private val context: Context, dataSet: List<Todo>) :
             if (!todo.isCompleted) {
                 holder.todoCheckBox.isEnabled = false
                 holder.todoTask.setTextColor(context.resources.getColor(R.color.error))
-                //show Toast when click on expired task
+                // show Toast when click on expired task
                 holder.card.setOnClickListener {
                     Toast.makeText(
                         context,
                         "The task time has expired \n You can edited the time,\n so try to finish in time",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_LONG,
                     ).show()
                 }
             }
         }
 
-
-        //expand the layout or unexpand
+        // expand the layout or unexpand
         holder.expand.setOnClickListener {
             if (holder.linearLayout.isGone) {
                 holder.linearLayout.visibility = View.VISIBLE
@@ -109,13 +102,8 @@ class WontDoAdapter(private val context: Context, dataSet: List<Todo>) :
                     notifyItemChanged(position)
                 }
             }
-
-
         }
-
-
     }
-
 
     override fun getItemCount(): Int = toDoItem.size
 }

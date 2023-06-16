@@ -1,11 +1,11 @@
 package com.example.tabea
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tabea.databinding.FragmentEditTodoBinding
@@ -17,20 +17,18 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import kotlin.properties.Delegates
 
-
 class EditTodoFragment : Fragment() {
     private val sharedViewModel: TodoViewModel by activityViewModels()
     private var binding: FragmentEditTodoBinding? = null
 
-     lateinit var TODOTASK: String
-     lateinit var DATEOFTASK: String
-     lateinit var TIMETOFINSH: String
-     lateinit var DETAILSOFTASK: String
-     lateinit var INDEX: String
-     var ISCOMPLETED by Delegates.notNull<Boolean>()
+    lateinit var TODOTASK: String
+    lateinit var DATEOFTASK: String
+    lateinit var TIMETOFINSH: String
+    lateinit var DETAILSOFTASK: String
+    lateinit var INDEX: String
+    var ISCOMPLETED by Delegates.notNull<Boolean>()
 
-
-    //to set the key in variable
+    // to set the key in variable
     companion object {
         const val todoTask = "todoTaskToEdit"
         const val dateOfTask = "dateToEdit"
@@ -41,10 +39,10 @@ class EditTodoFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
-
         // Inflate the layout for this fragment.
         val fragmentBinding = FragmentEditTodoBinding.inflate(inflater, container, false)
         binding = fragmentBinding
@@ -61,13 +59,12 @@ class EditTodoFragment : Fragment() {
             DATEOFTASK = it.getString(dateOfTask).toString()
             INDEX = it.getString(indexOfTask).toString()
             ISCOMPLETED = it.getBoolean(isCompleted)
-
         }
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = sharedViewModel
 
-            //@ because inside binding.apply this revers to the binding instance
+            // @ because inside binding.apply this revers to the binding instance
             // not the class EditTodoFragment
             editTodoFragment = this@EditTodoFragment
             timeText.textDirection
@@ -83,31 +80,31 @@ class EditTodoFragment : Fragment() {
         if (sharedViewModel.isDataNotEmpty(
                 binding?.todoEdittext?.editText?.text.toString(),
                 binding?.timeText?.text.toString(),
-                binding?.dateText?.text.toString()
+                binding?.dateText?.text.toString(),
             )
         ) {
             sharedViewModel.editTask(
-                INDEX.toInt(), Todo(
+                INDEX.toInt(),
+                Todo(
                     binding?.todoEdittext?.editText?.text.toString(),
                     binding?.descriptionEdittext?.editText?.text.toString(),
                     sharedViewModel.time.value.toString(),
                     sharedViewModel.date.value.toString(),
-                    ISCOMPLETED
-                )
+                    ISCOMPLETED,
+                ),
             )
 
             findNavController().navigate(R.id.action_editTodoFragment_to_theListOfTodoFragment)
-
-        } else
+        } else {
             Toast.makeText(context, "please don't let any information empty", Toast.LENGTH_LONG)
                 .show()
+        }
     }
 
-
-    //fun to show DatePicker to choice the date deadline of the task.
+    // fun to show DatePicker to choice the date deadline of the task.
     fun showDatePicker() {
-        //DatePicker, set title of DatePicker,
-        //set default selection on today.
+        // DatePicker, set title of DatePicker,
+        // set default selection on today.
         val datePicker = MaterialDatePicker.Builder.datePicker()
             .setTitleText("Select Date")
             .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
@@ -120,19 +117,18 @@ class EditTodoFragment : Fragment() {
         val picker = datePicker.build()
         picker.show(requireFragmentManager(), picker.toString())
         picker.addOnPositiveButtonClickListener {
-            //set the date.
+            // set the date.
             sharedViewModel.setDate(it)
             binding?.dateText?.text = sharedViewModel.date.value
         }
-
     }
 
-    //fun to show TimePicker to choice the time deadline of the task.
+    // fun to show TimePicker to choice the time deadline of the task.
     fun showTimePicker() {
-        //call fun setSystemHourFormat() to return the system time format.
+        // call fun setSystemHourFormat() to return the system time format.
         val clockFormat = sharedViewModel.setSystemHourFormat(requireContext())
 
-        //set timepicker TimeFormat , Hour , Minute & Title then show.
+        // set timepicker TimeFormat , Hour , Minute & Title then show.
         val timePicker = MaterialTimePicker.Builder()
         timePicker.setTimeFormat(clockFormat).setHour(4).setMinute(30)
             .setTitleText("Select Appointment time").build()
@@ -142,11 +138,8 @@ class EditTodoFragment : Fragment() {
         // when the user choice the time call setTime() fun.
 
         picker.addOnPositiveButtonClickListener {
-            sharedViewModel.setTime("${picker.hour.toString()}:${picker.minute.toString()}")
+            sharedViewModel.setTime("${picker.hour}:${picker.minute}")
             binding?.timeText?.text = sharedViewModel.time.value
-
         }
     }
-
 }
-

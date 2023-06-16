@@ -11,9 +11,7 @@ import com.google.android.material.timepicker.TimeFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class TodoViewModel : ViewModel() {
-
 
     private var _notCompletedListSize = MutableLiveData(DataSource.getTasksSize().toString())
     val notCompletedListSize get() = _notCompletedListSize
@@ -37,15 +35,13 @@ class TodoViewModel : ViewModel() {
     private var _isCompleted = MutableLiveData<Boolean>()
     val isCompleted get() = _isCompleted
 
-
-//fun start
+// fun start
 
     fun dateFormatter(): SimpleDateFormat {
         return SimpleDateFormat("dd/MM/yyyy")
     }
 
-
-    //fun's set
+    // fun's set
     fun setDate(selectedDate: Long?) {
         // to format the date
         _date.value = dateFormatter().format(selectedDate)
@@ -53,7 +49,6 @@ class TodoViewModel : ViewModel() {
 
     fun setTime(time: String) {
         _time.value = time
-
     }
 
     private fun setTodo(newTodo: String) {
@@ -64,8 +59,7 @@ class TodoViewModel : ViewModel() {
         _description.value = newDescription ?: ""
     }
 
-
-    //funs to check if the data is not null
+    // funs to check if the data is not null
     fun isDataNotEmpty(todoText: String, time: String, date: String): Boolean {
         val todoTaskCheck = isTodoTaskNotEmpty(todoText)
         val timeCheck = isTimeNotEmpty(time)
@@ -79,17 +73,15 @@ class TodoViewModel : ViewModel() {
 
     private fun isTodoTaskNotEmpty(todoText: String): Boolean = todoText != ""
 
-
     // fun to return the system time format.
     fun setSystemHourFormat(context: Context): Int {
-        //variable to make the time format match the device time format
+        // variable to make the time format match the device time format
         val isSystem24Hour = DateFormat.is24HourFormat(context)
-        //if the timeFormat in the system is 24 return it 24h else return  12h
+        // if the timeFormat in the system is 24 return it 24h else return  12h
         return if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
     }
 
-
-    //fun the add and delete
+    // fun the add and delete
     fun addTodoTask(todoText: String, details: String?) {
         setTodo(todoText)
         setDescription(details)
@@ -98,17 +90,16 @@ class TodoViewModel : ViewModel() {
                 _toDoTitle.value.toString(),
                 _description.value.toString(),
                 _time.value.toString(),
-                _date.value.toString(), false
-            )
+                _date.value.toString(),
+                false,
+            ),
         )
     }
-
 
     fun setIsCompleted(index: Int, IsCompleted: Boolean) {
         DataSource.setIsCompleted(IsCompleted, index)
         _isCompleted.value = IsCompleted
     }
-
 
     private fun addNewTask(task: Todo) {
         DataSource.addNewTask(task)
@@ -118,7 +109,6 @@ class TodoViewModel : ViewModel() {
     fun deleteTask(task: Todo) {
         DataSource.deleteTask(task)
         setNotCompletedListSize()
-
     }
 
     fun editTask(index: Int, task: Todo) = DataSource.editTask(index, task)
@@ -143,14 +133,13 @@ class TodoViewModel : ViewModel() {
         println(DataSource.taskList)
     }
 
-
     fun clearList() {
         DataSource.clearList()
     }
 
     fun dateOfToday(): Date {
         val calendar = Calendar.getInstance()
-        //set time to 00:00:00
+        // set time to 00:00:00
         // so you will not face problem with the time when compare 2 date
         calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
@@ -158,10 +147,4 @@ class TodoViewModel : ViewModel() {
         calendar.set(Calendar.MILLISECOND, 0)
         return calendar.time
     }
-
 }
-
-
-
-
-

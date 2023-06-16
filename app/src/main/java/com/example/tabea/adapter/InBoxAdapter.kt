@@ -1,31 +1,30 @@
 package com.example.tabea.adapter
 
-import android.content.Context
-import android.view.*
-import android.widget.*
-import androidx.recyclerview.widget.RecyclerView
-import com.example.tabea.R
-import com.example.tabea.model.Todo
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Paint
 import android.os.Build
+import android.view.*
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tabea.InBoxFragmentDirections
+import com.example.tabea.R
+import com.example.tabea.model.Todo
 import com.example.tabea.model.TodoViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
-        RecyclerView.Adapter<InBoxAdapter.ItemViewHolder>() {
+    RecyclerView.Adapter<InBoxAdapter.ItemViewHolder>() {
     val viewModel = TodoViewModel()
     private val toDoItem = dataSet
 
-    //here we hold the view in listoftodo.xml
+    // here we hold the view in listoftodo.xml
     class ItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         val todoCheckBox: CheckBox = view.findViewById(R.id.todocheckbox)
@@ -40,27 +39,21 @@ class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
         val card: CardView = view.findViewById(R.id.card)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
-                .inflate(R.layout.listoftodo, parent, false)
+            .inflate(R.layout.listoftodo, parent, false)
 
         return ItemViewHolder(adapterLayout)
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-
         val todo = toDoItem[position]
         holder.todoTask.text = todo.todoText
         holder.dateText.text = todo.date
         holder.timeText.text = todo.time
         holder.detailsText.text = todo.details
-
-
 
         // add lineThrough TodoTask when CheckBox Checked or remove line
         holder.todoCheckBox.setOnCheckedChangeListener { _, isChecked ->
@@ -73,11 +66,10 @@ class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
             holder.todoCheckBox.isChecked = !holder.todoCheckBox.isChecked
         }
 
-
         // fun return the current date of today
         val nowDate = dateOfToday()
         // parse the date from String to Date
-      val sdf =  SimpleDateFormat("dd/MM/yyyy")
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
         val taskTime = sdf.parse(todo.date)
         /* check if the task time is past or not */
         if (taskTime.before(nowDate)) {
@@ -85,35 +77,36 @@ class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
             if (!todo.isCompleted) {
                 holder.todoCheckBox.isEnabled = false
                 holder.todoTask.setTextColor(context.resources.getColor(R.color.error))
-                //show Toast when click on expired task
+                // show Toast when click on expired task
                 holder.card.setOnClickListener {
                     Toast.makeText(
-                            context,
-                            "The task time has expired \n You can edited the time,\n so try to finish in time",
-                            Toast.LENGTH_LONG
+                        context,
+                        "The task time has expired \n You can edited the time,\n so try to finish in time",
+                        Toast.LENGTH_LONG,
                     ).show()
                 }
             }
         }
 
-        //show the menu on the Icon
+        // show the menu on the Icon
         holder.theMenu.setOnClickListener {
             val popupMenu = PopupMenu(context, it)
             popupMenu.menuInflater.inflate(R.menu.pop_menu, popupMenu.menu)
             popupMenu.show()
-            //set the menu item action
+            // set the menu item action
             popupMenu.setOnMenuItemClickListener { item: MenuItem? ->
                 when (item?.itemId) {
                     R.id.menu_edit_todo -> {
                         val action = InBoxFragmentDirections
-                                .actionTheListOfTodoFragmentToEditTodoFragment(
-                                        todoTaskToEdit = todo.todoText,
-                                        descriptionToEdit = todo.details,
-                                        timeToEdit = todo.time,
-                                        dateToEdit = todo.date,
-                                        positionOfTask = position.toString(), isCompleted = todo.isCompleted,
-                                )
-                        //perform navigation action
+                            .actionTheListOfTodoFragmentToEditTodoFragment(
+                                todoTaskToEdit = todo.todoText,
+                                descriptionToEdit = todo.details,
+                                timeToEdit = todo.time,
+                                dateToEdit = todo.date,
+                                positionOfTask = position.toString(),
+                                isCompleted = todo.isCompleted,
+                            )
+                        // perform navigation action
                         notifyItemChanged(position)
                         holder.view.findNavController().navigate(action)
                         true
@@ -125,13 +118,10 @@ class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
                         true
                     }
                 }
-
             }
-        }//end of the popUpMenu
+        } // end of the popUpMenu
 
-
-
-        //expand the layout or unexpand
+        // expand the layout or unexpand
         holder.expand.setOnClickListener {
             if (holder.linearLayout.isGone) {
                 holder.linearLayout.visibility = View.VISIBLE
@@ -145,18 +135,15 @@ class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
                     notifyItemChanged(position)
                 }
             }
-
-
         }
-
-
     }
 
-    //fun to make LineThrough Task & disEnable CheckBox when task is completed
+    // fun to make LineThrough Task & disEnable CheckBox when task is completed
     private fun makeLineThroughTask(
-            taskTextView: TextView, isCompleted: Boolean, position: Int
+        taskTextView: TextView,
+        isCompleted: Boolean,
+        position: Int,
     ) {
-
         if (isCompleted) {
             taskTextView.paintFlags = taskTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
@@ -170,7 +157,7 @@ class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
 
     private fun dateOfToday(): Date {
         val calendar = Calendar.getInstance()
-        //set time to 00:00:00
+        // set time to 00:00:00
         // so you will not face problem with the time when compare 2 date
         calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
