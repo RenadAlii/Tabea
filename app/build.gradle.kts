@@ -53,7 +53,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -85,4 +84,7 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44.2")
     // Navigation with Hilt
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    // room
+    implementation("androidx.room:room-runtime:2.5.1")
+    annotationProcessor("androidx.room:room-compiler:2.5.1")
 }
