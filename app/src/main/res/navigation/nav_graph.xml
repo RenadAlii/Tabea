@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/inboxfragment"
-        android:name="com.example.tabea.InBoxFragment"
+        android:name="com.renad.tabea.ui.InBoxFragment"
         android:label="InBox">
         <action
             android:id="@+id/action_theListOfTodoFragment_to_newTodoFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/newTodoFragment"
-        android:name="com.example.tabea.NewTodoFragment"
+        android:name="com.renad.tabea.ui.NewTodoFragment"
         android:label="Add New Task"
         tools:layout="@layout/fragment_new_todo">
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/editTodoFragment"
-        android:name="com.example.tabea.EditTodoFragment"
+        android:name="com.renad.tabea.ui.EditTodoFragment"
         android:label="Edit">
         <argument
             android:name="todoTaskToEdit"
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/completedTaskFragment"
-        android:name="com.example.tabea.CompletedTaskFragment"
+        android:name="com.renad.tabea.ui.CompletedTaskFragment"
         android:label="Completed Task">
         <action
             android:id="@+id/action_completedTaskFragment_to_editTodoFragment"
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/wontDoFragment"
-        android:name="com.example.tabea.WontDoFragment"
+        android:name="com.renad.tabea.ui.WontDoFragment"
         android:label="Won't do">
         <action
             android:id="@+id/action_wontDoFragment_to_editTodoFragment"
@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/todayTaskFragment"
-        android:name="com.example.tabea.TodayTaskFragment"
+        android:name="com.renad.tabea.ui.TodayTaskFragment"
         android:label="Today">
         <action
             android:id="@+id/action_todayTaskFragment_to_editTodoFragment"

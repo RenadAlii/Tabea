@@ -8,10 +8,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.tabea.model.TodoViewModel" />
+            type="com.renad.tabea.ui.TodoViewModel" />
         <variable
             name="editTodoFragment"
-            type="com.example.tabea.EditTodoFragment" />
+            type="com.renad.tabea.ui.EditTodoFragment" />
 
     </data>
 

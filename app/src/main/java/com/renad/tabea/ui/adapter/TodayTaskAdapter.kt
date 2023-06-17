@@ -1,7 +1,8 @@
-package com.example.tabea.adapter
+package com.renad.tabea.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Paint
 import android.os.Build
 import android.view.*
 import android.widget.*
@@ -10,19 +11,19 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tabea.R
-import com.example.tabea.model.Todo
-import com.example.tabea.model.TodoViewModel
+import com.renad.tabea.R
+import com.renad.tabea.data.model.Todo
+import com.renad.tabea.ui.TodoViewModel
 import java.text.SimpleDateFormat
 
-class WontDoAdapter(private val context: Context, dataSet: List<Todo>) :
-    RecyclerView.Adapter<WontDoAdapter.ItemViewHolder>() {
+class TodayTaskAdapter(private val context: Context, dataSet: List<Todo>) :
+    RecyclerView.Adapter<TodayTaskAdapter.ItemViewHolder>() {
     val viewModel = TodoViewModel()
     private val toDoItem = dataSet.filter {
         val dateTodo = it.date
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         val date = sdf.parse(dateTodo)
-        !it.isCompleted && date.before(viewModel.dateOfToday())
+        date == (viewModel.dateOfToday())
     }
 
     // here we hold the view in listoftodo.xml
@@ -66,26 +67,15 @@ class WontDoAdapter(private val context: Context, dataSet: List<Todo>) :
         holder.card.setOnClickListener {
             Toast.makeText(context, "if you want to make any change go to InBox", Toast.LENGTH_LONG).show()
         }
+        // add lineThrough TodoTask when CheckBox Checked or remove line
+        holder.todoCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            makeLineThroughTask(holder.todoTask, isChecked, position)
+        }
 
-        // fun return the current date of today
-        val nowDate = viewModel.dateOfToday()
-        // parse the date from String to Date
-        val taskTime = viewModel.dateFormatter().parse(todo.date)
-        /* check if the task time is past or not */
-        if (taskTime.before(nowDate)) {
-            // check if the task is not completed before doing anything
-            if (!todo.isCompleted) {
-                holder.todoCheckBox.isEnabled = false
-                holder.todoTask.setTextColor(context.resources.getColor(R.color.error))
-                // show Toast when click on expired task
-                holder.card.setOnClickListener {
-                    Toast.makeText(
-                        context,
-                        "The task time has expired \n You can edited the time,\n so try to finish in time",
-                        Toast.LENGTH_LONG,
-                    ).show()
-                }
-            }
+        // add lineThrough TodoTask if it's Completed
+        if (todo.isCompleted) {
+            holder.todoTask.paintFlags = holder.todoTask.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            holder.todoCheckBox.isChecked = !holder.todoCheckBox.isChecked
         }
 
         // expand the layout or unexpand
@@ -102,6 +92,23 @@ class WontDoAdapter(private val context: Context, dataSet: List<Todo>) :
                     notifyItemChanged(position)
                 }
             }
+        }
+    }
+
+    // fun to make LineThrough Task & disEnable CheckBox when task is completed
+    private fun makeLineThroughTask(
+        taskTextView: TextView,
+        isCompleted: Boolean,
+        position: Int,
+    ) {
+        if (isCompleted) {
+            taskTextView.paintFlags = taskTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
+            viewModel.setIsCompleted(position, true)
+        } else {
+            taskTextView.paintFlags = 0
+
+            viewModel.setIsCompleted(position, false)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.tabea
+package com.renad.tabea.ui
 
 import android.os.Build
 import android.os.Bundle
@@ -9,11 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.tabea.adapter.InBoxAdapter
-import com.example.tabea.data.DataSource
-import com.example.tabea.databinding.FragmentInBoxBinding
-import com.example.tabea.model.TodoViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.renad.tabea.R
+import com.renad.tabea.data.DataSource
+import com.renad.tabea.databinding.FragmentInBoxBinding
+import com.renad.tabea.ui.adapter.InBoxAdapter
 
 class InBoxFragment : Fragment() {
 

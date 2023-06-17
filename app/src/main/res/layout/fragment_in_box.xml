@@ -9,11 +9,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.tabea.model.TodoViewModel" />
+            type="com.renad.tabea.ui.TodoViewModel" />
 
         <variable
             name="todayTaskFragment"
-            type="com.example.tabea.TodayTaskFragment" />
+            type="com.renad.tabea.ui.TodayTaskFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

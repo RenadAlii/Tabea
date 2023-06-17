@@ -1,4 +1,4 @@
-package com.example.tabea
+package com.renad.tabea.ui
 
 import android.os.Bundle
 import android.view.*
@@ -7,10 +7,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.tabea.adapter.TodayTaskAdapter
-import com.example.tabea.data.DataSource
-import com.example.tabea.databinding.FragmentTodayTaskBinding
-import com.example.tabea.model.TodoViewModel
+import com.renad.tabea.R
+import com.renad.tabea.data.DataSource
+import com.renad.tabea.databinding.FragmentTodayTaskBinding
+import com.renad.tabea.ui.adapter.TodayTaskAdapter
 
 class TodayTaskFragment : Fragment() {
 

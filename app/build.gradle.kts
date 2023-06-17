@@ -5,7 +5,7 @@ plugins {
     id("kotlin-android")
     id("androidx.navigation.safeargs.kotlin")
     kotlin("kapt")
-    id("com.google.dagger.hilt.android")
+//    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -79,12 +79,12 @@ dependencies {
     // Testing Navigation
     androidTestImplementation("androidx.navigation:navigation-testing:2.6.0")
     // hilt
-    implementation("com.google.dagger:hilt-android:2.44.2")
+//    implementation("com.google.dagger:hilt-android:2.44.2")
     // declare the implementation for the compiler
-    kapt("com.google.dagger:hilt-android-compiler:2.44.2")
+//    kapt("com.google.dagger:hilt-android-compiler:2.44.2")
     // Navigation with Hilt
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+//    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     // room
     implementation("androidx.room:room-runtime:2.5.1")
-    annotationProcessor("androidx.room:room-compiler:2.5.1")
+    kapt("androidx.room:room-compiler:2.5.1")
 }

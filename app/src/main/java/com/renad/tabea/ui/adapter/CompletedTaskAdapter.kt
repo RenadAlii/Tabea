@@ -1,4 +1,4 @@
-package com.example.tabea.adapter
+package com.renad.tabea.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,9 +11,9 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tabea.R
-import com.example.tabea.model.Todo
-import com.example.tabea.model.TodoViewModel
+import com.renad.tabea.R
+import com.renad.tabea.data.model.Todo
+import com.renad.tabea.ui.TodoViewModel
 
 class CompletedTaskAdapter(private val context: Context, dataSet: List<Todo>) :
     RecyclerView.Adapter<CompletedTaskAdapter.ItemViewHolder>() {

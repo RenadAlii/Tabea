@@ -8,10 +8,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.tabea.model.TodoViewModel" />
+            type="com.renad.tabea.ui.TodoViewModel" />
         <variable
             name="newTodoFragment"
-            type="com.example.tabea.NewTodoFragment" />
+            type="com.renad.tabea.ui.NewTodoFragment" />
     </data>
 
 <ScrollView

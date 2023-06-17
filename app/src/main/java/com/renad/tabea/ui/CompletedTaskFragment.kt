@@ -1,4 +1,4 @@
-package com.example.tabea
+package com.renad.tabea.ui
 
 import android.os.Build
 import android.os.Bundle
@@ -8,10 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.tabea.adapter.CompletedTaskAdapter
-import com.example.tabea.data.DataSource
-import com.example.tabea.databinding.FragmentCompletedTaskBinding
-import com.example.tabea.model.TodoViewModel
+import com.renad.tabea.data.DataSource
+import com.renad.tabea.databinding.FragmentCompletedTaskBinding
+import com.renad.tabea.ui.adapter.CompletedTaskAdapter
 
 class CompletedTaskFragment : Fragment() {
 

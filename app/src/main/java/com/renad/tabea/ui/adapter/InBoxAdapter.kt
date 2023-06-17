@@ -1,4 +1,4 @@
-package com.example.tabea.adapter
+package com.renad.tabea.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -12,10 +12,10 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tabea.InBoxFragmentDirections
-import com.example.tabea.R
-import com.example.tabea.model.Todo
-import com.example.tabea.model.TodoViewModel
+import com.renad.tabea.ui.InBoxFragmentDirections
+import com.renad.tabea.R
+import com.renad.tabea.data.model.Todo
+import com.renad.tabea.ui.TodoViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -1,4 +1,4 @@
-package com.example.tabea.model
+package com.renad.tabea.ui
 
 import android.content.Context
 import android.os.Build
@@ -6,8 +6,9 @@ import android.text.format.DateFormat
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.tabea.data.DataSource
 import com.google.android.material.timepicker.TimeFormat
+import com.renad.tabea.data.DataSource
+import com.renad.tabea.data.model.Todo
 import java.text.SimpleDateFormat
 import java.util.*
 
