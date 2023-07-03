@@ -57,7 +57,7 @@ class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
 
         // add lineThrough TodoTask when CheckBox Checked or remove line
         holder.todoCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            makeLineThroughTask(holder.todoTask, isChecked, position)
+            makeLineThroughTask(holder.todoTask, isChecked, todo)
         }
 
         // add lineThrough TodoTask if it's Completed
@@ -142,16 +142,12 @@ class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
     private fun makeLineThroughTask(
         taskTextView: TextView,
         isCompleted: Boolean,
-        position: Int,
+        todo: Todo,
     ) {
         if (isCompleted) {
             taskTextView.paintFlags = taskTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-
-            viewModel.setIsCompleted(position, true)
         } else {
             taskTextView.paintFlags = 0
-
-            viewModel.setIsCompleted(position, false)
         }
     }
 

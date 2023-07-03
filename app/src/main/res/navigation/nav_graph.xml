@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/completedTaskFragment"
-        android:name="com.renad.tabea.ui.CompletedTaskFragment"
+        android:name="com.renad.tabea.ui.completed.CompletedTaskFragment"
         android:label="Completed Task">
         <action
             android:id="@+id/action_completedTaskFragment_to_editTodoFragment"

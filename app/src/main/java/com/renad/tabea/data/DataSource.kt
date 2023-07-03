@@ -12,14 +12,13 @@ object DataSource {
 
     )
 
-    fun setIsCompleted(completedState: Boolean, index: Int) {
-        taskList[index].isCompleted = completedState
+    fun setIsCompleted(completedState: Boolean, task: Todo) {
+        taskList.find { task == it }?.isCompleted = completedState
     }
     fun getTasksSize(): Int = taskList.size
 
     fun addNewTask(task: Todo) {
         taskList.add(task)
-        task.isCompleted
     }
 
     fun deleteTask(task: Todo) = taskList.remove(task)

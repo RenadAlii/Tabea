@@ -13,7 +13,7 @@
 
         <variable
             name="theListOfTodoFragment"
-            type="com.renad.tabea.ui.CompletedTaskFragment" />
+            type="com.renad.tabea.ui.completed.CompletedTaskFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

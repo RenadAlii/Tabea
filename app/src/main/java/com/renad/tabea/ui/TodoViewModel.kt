@@ -97,9 +97,9 @@ class TodoViewModel : ViewModel() {
         )
     }
 
-    fun setIsCompleted(index: Int, IsCompleted: Boolean) {
-        DataSource.setIsCompleted(IsCompleted, index)
-        _isCompleted.value = IsCompleted
+    fun setIsCompleted(task: Todo) {
+        DataSource.setIsCompleted(!task.isCompleted, task)
+        _isCompleted.value = !task.isCompleted
     }
 
     private fun addNewTask(task: Todo) {
