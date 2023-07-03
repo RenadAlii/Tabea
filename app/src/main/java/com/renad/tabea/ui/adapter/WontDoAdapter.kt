@@ -11,11 +11,11 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.renad.tabea.R
-import com.renad.tabea.data.model.Todo
+import com.renad.tabea.data.model.Task
 import com.renad.tabea.ui.TodoViewModel
 import java.text.SimpleDateFormat
 
-class WontDoAdapter(private val context: Context, dataSet: List<Todo>) :
+class WontDoAdapter(private val context: Context, dataSet: List<Task>) :
     RecyclerView.Adapter<WontDoAdapter.ItemViewHolder>() {
     val viewModel = TodoViewModel()
     private val toDoItem = dataSet.filter {

@@ -13,7 +13,7 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.renad.tabea.R
-import com.renad.tabea.data.model.Todo
+import com.renad.tabea.data.model.Task
 import com.renad.tabea.databinding.FragmentEditTodoBinding
 import kotlin.properties.Delegates
 
@@ -85,7 +85,7 @@ class EditTodoFragment : Fragment() {
         ) {
             sharedViewModel.editTask(
                 INDEX.toInt(),
-                Todo(
+                Task(
                     binding?.todoEdittext?.editText?.text.toString(),
                     binding?.descriptionEdittext?.editText?.text.toString(),
                     sharedViewModel.time.value.toString(),

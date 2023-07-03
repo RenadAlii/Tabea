@@ -85,6 +85,8 @@ dependencies {
     // Navigation with Hilt
 //    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     // room
-    implementation("androidx.room:room-runtime:2.5.1")
-    kapt("androidx.room:room-compiler:2.5.1")
+    implementation("androidx.room:room-runtime:2.5.2")
+    kapt("androidx.room:room-compiler:2.5.2")
+    testImplementation("androidx.room:room-testing:2.5.2")
+
 }

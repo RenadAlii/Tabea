@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.material.timepicker.TimeFormat
 import com.renad.tabea.data.DataSource
-import com.renad.tabea.data.model.Todo
+import com.renad.tabea.data.model.Task
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -87,7 +87,7 @@ class TodoViewModel : ViewModel() {
         setTodo(todoText)
         setDescription(details)
         addNewTask(
-            Todo(
+            Task(
                 _toDoTitle.value.toString(),
                 _description.value.toString(),
                 _time.value.toString(),
@@ -97,22 +97,22 @@ class TodoViewModel : ViewModel() {
         )
     }
 
-    fun setIsCompleted(task: Todo) {
+    fun setIsCompleted(task: Task) {
         DataSource.setIsCompleted(!task.isCompleted, task)
         _isCompleted.value = !task.isCompleted
     }
 
-    private fun addNewTask(task: Todo) {
+    private fun addNewTask(task: Task) {
         DataSource.addNewTask(task)
         setNotCompletedListSize()
     }
 
-    fun deleteTask(task: Todo) {
+    fun deleteTask(task: Task) {
         DataSource.deleteTask(task)
         setNotCompletedListSize()
     }
 
-    fun editTask(index: Int, task: Todo) = DataSource.editTask(index, task)
+    fun editTask(index: Int, task: Task) = DataSource.editTask(index, task)
     fun setNotCompletedListSize() {
         _notCompletedListSize.value = DataSource.getTasksSize().toString()
         println(notCompletedListSize.value)

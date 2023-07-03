@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.renad.tabea.R
 import com.renad.tabea.data.DataSource
-import com.renad.tabea.data.model.Todo
+import com.renad.tabea.data.model.Task
 import com.renad.tabea.databinding.FragmentTodayTaskBinding
 import com.renad.tabea.ui.completed.CompletedTaskAdapter
 import java.text.SimpleDateFormat
@@ -57,7 +57,7 @@ class TodayTaskFragment : Fragment() {
         registerForContextMenu(binding.recyclerView)
     }
 
-    private fun onTaskChecked(task: Todo) {
+    private fun onTaskChecked(task: Task) {
         sharedViewModel.setIsCompleted(task)
     }
 

@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.renad.tabea.data.DataSource
-import com.renad.tabea.data.model.Todo
+import com.renad.tabea.data.model.Task
 import com.renad.tabea.databinding.FragmentCompletedTaskBinding
 import com.renad.tabea.ui.TodoViewModel
 
@@ -49,7 +49,7 @@ class CompletedTaskFragment : Fragment() {
         registerForContextMenu(binding.recyclerView)
     }
 
-    private fun onTaskChecked(task: Todo) {
+    private fun onTaskChecked(task: Task) {
         sharedViewModel.setIsCompleted(task)
     }
 

@@ -14,12 +14,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.renad.tabea.ui.InBoxFragmentDirections
 import com.renad.tabea.R
-import com.renad.tabea.data.model.Todo
+import com.renad.tabea.data.model.Task
 import com.renad.tabea.ui.TodoViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
+class InBoxAdapter(private val context: Context, dataSet: List<Task>) :
     RecyclerView.Adapter<InBoxAdapter.ItemViewHolder>() {
     val viewModel = TodoViewModel()
     private val toDoItem = dataSet
@@ -142,7 +142,7 @@ class InBoxAdapter(private val context: Context, dataSet: List<Todo>) :
     private fun makeLineThroughTask(
         taskTextView: TextView,
         isCompleted: Boolean,
-        todo: Todo,
+        todo: Task,
     ) {
         if (isCompleted) {
             taskTextView.paintFlags = taskTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG

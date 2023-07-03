@@ -10,15 +10,15 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.renad.tabea.data.model.Todo
+import com.renad.tabea.data.model.Task
 import com.renad.tabea.databinding.ListoftodoBinding
 
-class CompletedTaskAdapter(val onItemClicked: () -> Unit, val onTaskCheked: (Todo) -> Unit) :
-    ListAdapter<Todo, CompletedTaskAdapter.ItemViewHolder>(DiffCallback) {
+class CompletedTaskAdapter(val onItemClicked: () -> Unit, val onTaskCheked: (Task) -> Unit) :
+    ListAdapter<Task, CompletedTaskAdapter.ItemViewHolder>(DiffCallback) {
 
     inner class ItemViewHolder(private var binding: ListoftodoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(todo: Todo) {
+        fun bind(todo: Task) {
             binding.apply {
                 todoTaskText.text = todo.todoText
                 dateText.text = todo.date
@@ -89,15 +89,15 @@ class CompletedTaskAdapter(val onItemClicked: () -> Unit, val onTaskCheked: (Tod
         holder.bind(getItem(position))
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Todo>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<Task>() {
         override fun areItemsTheSame(
-            oldItem: Todo,
-            newItem: Todo,
+            oldItem: Task,
+            newItem: Task,
         ): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Todo, newItem: Todo): Boolean {
+        override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
             return oldItem.todoText == newItem.todoText
         }
     }
