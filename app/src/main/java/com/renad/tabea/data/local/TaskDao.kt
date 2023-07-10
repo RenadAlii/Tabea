@@ -27,7 +27,7 @@ interface TaskDao {
      * Sort By ASC
      */
     @Query("SELECT * FROM task ORDER BY title ASC")
-    suspend fun getAllTasksSortByASC(orderType: String): List<TaskEntity>
+    suspend fun getAllTasksSortByASC(): List<TaskEntity>
 
     /**
      * One-shot query that only runs once and return snapshot of Tasks

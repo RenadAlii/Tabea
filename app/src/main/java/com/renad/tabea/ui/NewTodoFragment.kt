@@ -13,6 +13,7 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.renad.tabea.R
+import com.renad.tabea.core.extensions.getSystemHourFormat
 import com.renad.tabea.databinding.FragmentNewTodoBinding
 
 class NewTodoFragment : Fragment() {
@@ -90,7 +91,7 @@ class NewTodoFragment : Fragment() {
     // fun to show TimePicker to choice the time deadline of the task.
     fun showTimePicker() {
         // call fun setSystemHourFormat() to return the system time format.
-        val clockFormat = sharedViewModel.setSystemHourFormat(requireContext())
+        val clockFormat = getSystemHourFormat()
 
         // set timepicker TimeFormat , Hour , Minute & Title then show.
         val timePicker = MaterialTimePicker.Builder()

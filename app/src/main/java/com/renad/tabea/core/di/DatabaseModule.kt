@@ -1,4 +1,4 @@
-package com.renad.tabea.di
+package com.renad.tabea.core.di
 
 import android.content.Context
 import androidx.room.Room

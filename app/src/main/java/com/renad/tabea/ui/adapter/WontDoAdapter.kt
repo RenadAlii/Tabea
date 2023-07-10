@@ -11,6 +11,8 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.renad.tabea.R
+import com.renad.tabea.core.util.DateUtil
+import com.renad.tabea.core.util.DateUtil.getDate
 import com.renad.tabea.data.model.Task
 import com.renad.tabea.ui.TodoViewModel
 import java.text.SimpleDateFormat
@@ -21,8 +23,9 @@ class WontDoAdapter(private val context: Context, dataSet: List<Task>) :
     private val toDoItem = dataSet.filter {
         val dateTodo = it.date
         val sdf = SimpleDateFormat("dd/MM/yyyy")
-        val date = sdf.parse(dateTodo)
-        !it.isCompleted && date.before(viewModel.dateOfToday())
+        val date = sdf.parse(dateTodo.toString())
+        !it.isCompleted && date.before(DateUtil.dateOfToday())
+        // 5/7 before 8/7 == true
     }
 
     // here we hold the view in listoftodo.xml
@@ -51,8 +54,8 @@ class WontDoAdapter(private val context: Context, dataSet: List<Task>) :
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val todo = toDoItem[position]
-        holder.todoTask.text = todo.todoText
-        holder.dateText.text = todo.date
+        holder.todoTask.text = todo.task
+        holder.dateText.text = todo.date?.getDate().toString()
         holder.timeText.text = todo.time
         holder.detailsText.text = todo.details
 
@@ -68,11 +71,11 @@ class WontDoAdapter(private val context: Context, dataSet: List<Task>) :
         }
 
         // fun return the current date of today
-        val nowDate = viewModel.dateOfToday()
+        val nowDate = DateUtil.dateOfToday()
         // parse the date from String to Date
-        val taskTime = viewModel.dateFormatter().parse(todo.date)
+        val taskTime = todo.date?.getDate()
         /* check if the task time is past or not */
-        if (taskTime.before(nowDate)) {
+        if (taskTime?.before(nowDate) == true) {
             // check if the task is not completed before doing anything
             if (!todo.isCompleted) {
                 holder.todoCheckBox.isEnabled = false

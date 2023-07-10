@@ -30,18 +30,18 @@ object DataSource {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun sortByDES() = taskList.sortWith(compareBy<Task> { it.todoText[0].uppercase() }.reversed())
+    fun sortByDES() = taskList.sortWith(compareBy<Task> { it.task[0].uppercase() }.reversed())
     fun sortByDate() {
-        taskList.sortWith(
-            compareBy<Task> {
-                it.date.slice(0..1).toInt()
-            }.thenBy { it.date.slice(3..4).toInt() }
-                .thenBy { it.date.slice(6 until it.date.length).toInt() },
-        )
+//        taskList.sortWith(
+//            compareBy<Task> {
+//                it.date.slice(0..1).toInt()
+//            }.thenBy { it.date.slice(3..4).toInt() }
+//                .thenBy { it.date.slice(6 until it.date.length).toInt() },
+//        )
         println(taskList)
     }
 
-    fun sortByAES() = taskList.sortWith(compareBy { it.todoText[0].uppercase() })
+    fun sortByAES() = taskList.sortWith(compareBy { it.task[0].uppercase() })
 
     fun clearList() = taskList.clear()
 }

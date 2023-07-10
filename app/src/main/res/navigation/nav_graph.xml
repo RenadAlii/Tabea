@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/editTodoFragment"
-        android:name="com.renad.tabea.ui.EditTodoFragment"
+        android:name="com.renad.tabea.ui.edit.EditTaskFragment"
         android:label="Edit">
         <argument
             android:name="todoTaskToEdit"

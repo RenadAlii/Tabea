@@ -1,15 +1,13 @@
 package com.renad.tabea.ui
 
-import android.content.Context
 import android.os.Build
-import android.text.format.DateFormat
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.material.timepicker.TimeFormat
+import com.renad.tabea.core.util.DateUtil.dateFormatter
 import com.renad.tabea.data.DataSource
 import com.renad.tabea.data.model.Task
-import java.text.SimpleDateFormat
+import com.renad.tabea.data.model.TaskState
 import java.util.*
 
 class TodoViewModel : ViewModel() {
@@ -37,10 +35,6 @@ class TodoViewModel : ViewModel() {
     val isCompleted get() = _isCompleted
 
 // fun start
-
-    fun dateFormatter(): SimpleDateFormat {
-        return SimpleDateFormat("dd/MM/yyyy")
-    }
 
     // fun's set
     fun setDate(selectedDate: Long?) {
@@ -74,14 +68,6 @@ class TodoViewModel : ViewModel() {
 
     private fun isTodoTaskNotEmpty(todoText: String): Boolean = todoText != ""
 
-    // fun to return the system time format.
-    fun setSystemHourFormat(context: Context): Int {
-        // variable to make the time format match the device time format
-        val isSystem24Hour = DateFormat.is24HourFormat(context)
-        // if the timeFormat in the system is 24 return it 24h else return  12h
-        return if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
-    }
-
     // fun the add and delete
     fun addTodoTask(todoText: String, details: String?) {
         setTodo(todoText)
@@ -93,6 +79,7 @@ class TodoViewModel : ViewModel() {
                 _time.value.toString(),
                 _date.value.toString(),
                 false,
+                TaskState.ACTIVE,
             ),
         )
     }
@@ -138,14 +125,4 @@ class TodoViewModel : ViewModel() {
         DataSource.clearList()
     }
 
-    fun dateOfToday(): Date {
-        val calendar = Calendar.getInstance()
-        // set time to 00:00:00
-        // so you will not face problem with the time when compare 2 date
-        calendar.set(Calendar.HOUR_OF_DAY, 0)
-        calendar.set(Calendar.MINUTE, 0)
-        calendar.set(Calendar.SECOND, 0)
-        calendar.set(Calendar.MILLISECOND, 0)
-        return calendar.time
-    }
 }

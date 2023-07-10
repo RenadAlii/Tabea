@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.renad.tabea.R
+import com.renad.tabea.core.util.DateUtil.dateOfToday
 import com.renad.tabea.data.DataSource
 import com.renad.tabea.data.model.Task
 import com.renad.tabea.databinding.FragmentTodayTaskBinding
@@ -48,7 +49,7 @@ class TodayTaskFragment : Fragment() {
             val dateTodo = it.date
             val sdf = SimpleDateFormat("dd/MM/yyyy")
             val date = sdf.parse(dateTodo)
-            date == (sharedViewModel.dateOfToday())
+            date == (dateOfToday())
         }
         taskAdapter?.submitList(todayTasks)
         binding.floatingActionButton.setOnClickListener {

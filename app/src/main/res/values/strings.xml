@@ -26,4 +26,6 @@
     <string name="today">Today</string>
     <string name="completed_task">Completed Task</string>
     <string name="won_t_do">won\'t Do</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select Task Time</string>
 </resources>
