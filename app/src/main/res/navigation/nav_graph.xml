@@ -7,51 +7,26 @@
 
     <fragment
         android:id="@+id/inboxfragment"
-        android:name="com.renad.tabea.ui.InBoxFragment"
+        android:name="com.renad.tabea.ui.inBox.InBoxFragment"
         android:label="InBox">
         <action
             android:id="@+id/action_theListOfTodoFragment_to_newTodoFragment"
-            app:destination="@id/newTodoFragment" />
+            app:destination="@id/editTodoFragment" />
         <action
             android:id="@+id/action_theListOfTodoFragment_to_editTodoFragment"
             app:destination="@id/editTodoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/newTodoFragment"
-        android:name="com.renad.tabea.ui.NewTodoFragment"
-        android:label="Add New Task"
-        tools:layout="@layout/fragment_new_todo">
-        <action
-            android:id="@+id/action_newTodoFragment_to_theListOfTodoFragment"
-            app:destination="@id/inboxfragment" />
-        <action
-            android:id="@+id/action_newTodoFragment_pop_including_inboxfragment"
-            app:popUpTo="@id/inboxfragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
         android:id="@+id/editTodoFragment"
-        android:name="com.renad.tabea.ui.edit.EditTaskFragment"
+        android:name="com.renad.tabea.ui.upsert.UpsertTaskFragment"
         android:label="Edit">
         <argument
-            android:name="todoTaskToEdit"
-            app:argType="string" />
-        <argument
-            android:name="descriptionToEdit"
-            app:argType="string" />
-        <argument android:name="timeToEdit" />
-        <argument
-            android:name="dateToEdit"
-            app:argType="string" />
-        <argument
-            android:name="positionOfTask"
-            app:argType="string" />
+            android:name="taskId"
+            app:argType="integer"
+            app:nullable="true"/>
         <action
             android:id="@+id/action_editTodoFragment_to_theListOfTodoFragment"
             app:destination="@id/inboxfragment" />
-        <argument
-            android:name="isCompleted"
-            app:argType="boolean" />
         <action
             android:id="@+id/action_editTodoFragment_pop_including_inboxfragment"
             app:popUpTo="@id/inboxfragment"

@@ -2,7 +2,6 @@ package com.renad.tabea.data
 
 import com.renad.tabea.core.util.Dispatcher
 import com.renad.tabea.core.util.Response
-import com.renad.tabea.data.local.LocalTask
 import com.renad.tabea.data.local.TaskDao
 import com.renad.tabea.data.model.Task
 import kotlinx.coroutines.channels.awaitClose
@@ -22,39 +21,39 @@ class TaskRepositoryImp @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getAllTasksSortByASC(): Flow<Response<List<Task>>> = flowCall {
-        localDataSource.getAllTasksSortByASC()
+    override fun getAllTasksSortByASC(): Flow<Response<List<Task>>> = flowCall {
+        localDataSource.getAllTasksSortByASC().toExternal()
     }.flowOn(dispatcher.io)
 
-    override suspend fun getAllSortByDESC(): Flow<Response<List<Task>>> = flowCall {
-        localDataSource.getAllSortByDESC()
+    override fun getAllSortByDESC(): Flow<Response<List<Task>>> = flowCall {
+        localDataSource.getAllSortByDESC().toExternal()
     }.flowOn(dispatcher.io)
 
-    override suspend fun getTaskById(taskId: Int): Flow<Response<LocalTask>> = flowCall {
-        localDataSource.getTaskById(taskId)
+    override fun getTaskById(taskId: Int): Flow<Response<Task?>> = flowCall {
+        localDataSource.getTaskById(taskId)?.toExternal()
     }
 
-    override suspend fun insert(vararg task: LocalTask) = flowCall {
-        localDataSource.insert(task)
+    override fun upsert(task: Task) = flowCall {
+        localDataSource.upsert(task.toLocal())
     }.flowOn(dispatcher.io)
 
-    override suspend fun update(task: LocalTask) = flowCall {
-        localDataSource.update(task)
+    override fun update(task: Task) = flowCall {
+        localDataSource.update(task.toLocal())
     }.flowOn(dispatcher.io)
 
-    override suspend fun updateCompleted(taskId: String, completed: Boolean) = flowCall {
+    override fun updateCompleted(taskId: String, completed: Boolean) = flowCall {
         localDataSource.updateCompleted(taskId, completed)
     }.flowOn(dispatcher.io)
 
-    override suspend fun delete(task: LocalTask) = flowCall {
-        localDataSource.delete(task)
+    override fun delete(task: Task) = flowCall {
+        localDataSource.delete(task.toLocal())
     }.flowOn(dispatcher.io)
 
-    override suspend fun deleteById(taskId: String) = flowCall {
+    override fun deleteById(taskId: String) = flowCall {
         localDataSource.deleteById(taskId)
     }.flowOn(dispatcher.io)
 
-    override suspend fun deleteAll() = flowCall {
+    override fun deleteAll() = flowCall {
         localDataSource.deleteAll()
     }.flowOn(dispatcher.io)
 }

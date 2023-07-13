@@ -1,7 +1,6 @@
 package com.renad.tabea.data
 
 import com.renad.tabea.core.util.Response
-import com.renad.tabea.data.local.LocalTask
 import com.renad.tabea.data.model.Task
 import kotlinx.coroutines.flow.Flow
 
@@ -9,21 +8,21 @@ interface TaskRepository {
 
     fun getAllTasks(): Flow<Response<List<Task>>>
 
-    suspend fun getAllTasksSortByASC(): Flow<Response<List<Task>>>
+    fun getAllTasksSortByASC(): Flow<Response<List<Task>>>
 
-    suspend fun getAllSortByDESC(): Flow<Response<List<Task>>>
+    fun getAllSortByDESC(): Flow<Response<List<Task>>>
 
-    suspend fun getTaskById(taskId: Int): Flow<Response<LocalTask>>
+    fun getTaskById(taskId: Int): Flow<Response<Task?>>
 
-    suspend fun insert(vararg task: LocalTask): Flow<Response<Unit>>
+    fun upsert(task: Task): Flow<Response<Unit>>
 
-    suspend fun update(task: LocalTask): Flow<Response<Unit>>
+    fun update(task: Task): Flow<Response<Unit>>
 
-    suspend fun updateCompleted(taskId: String, completed: Boolean): Flow<Response<Unit>>
+    fun updateCompleted(taskId: String, completed: Boolean): Flow<Response<Unit>>
 
-    suspend fun delete(task: LocalTask): Flow<Response<Unit>>
+    fun delete(task: Task): Flow<Response<Unit>>
 
-    suspend fun deleteById(taskId: String): Flow<Response<Unit>>
+    fun deleteById(taskId: String): Flow<Response<Unit>>
 
-    suspend fun deleteAll(): Flow<Response<Unit>>
+    fun deleteAll(): Flow<Response<Unit>>
 }

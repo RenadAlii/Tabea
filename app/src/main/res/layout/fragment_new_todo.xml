@@ -11,7 +11,7 @@
             type="com.renad.tabea.ui.TodoViewModel" />
         <variable
             name="newTodoFragment"
-            type="com.renad.tabea.ui.NewTodoFragment" />
+            type="com.renad.tabea.ui.add.NewTodoFragment" />
     </data>
 
 <ScrollView

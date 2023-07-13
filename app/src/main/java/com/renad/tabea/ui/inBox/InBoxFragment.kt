@@ -1,4 +1,4 @@
-package com.renad.tabea.ui
+package com.renad.tabea.ui.inBox
 
 import android.os.Build
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.renad.tabea.R
 import com.renad.tabea.data.DataSource
 import com.renad.tabea.databinding.FragmentInBoxBinding
-import com.renad.tabea.ui.adapter.InBoxAdapter
+import com.renad.tabea.ui.TodoViewModel
 
 class InBoxFragment : Fragment() {
 

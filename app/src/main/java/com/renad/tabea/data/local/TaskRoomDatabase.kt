@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
  * The Room Database that contains the Task table.
  */
 
-@Database(entities = [TaskEntity::class], version = 1)
+@Database(entities = [LocalTask::class], version = 1)
 abstract class TaskRoomDatabase : RoomDatabase() {
 
     abstract fun taskDao(): TaskDao

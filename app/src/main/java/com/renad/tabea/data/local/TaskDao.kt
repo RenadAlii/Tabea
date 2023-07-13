@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -19,55 +20,55 @@ interface TaskDao {
      * Observable query that emit new Tasks whenever there are changes
      * Sort By ASC
      */
-    @Query("SELECT * FROM task ORDER BY title ASC")
-    fun getAllTasks(): Flow<List<TaskEntity>>
+    @Query("SELECT * FROM task ORDER BY task ASC")
+    fun getAllTasks(): Flow<List<LocalTask>>
 
     /**
      * One-shot query that only runs once and return snapshot of Tasks at time of execution
      * Sort By ASC
      */
-    @Query("SELECT * FROM task ORDER BY title ASC")
-    suspend fun getAllTasksSortByASC(): List<TaskEntity>
+    @Query("SELECT * FROM task ORDER BY task ASC")
+    suspend fun getAllTasksSortByASC(): List<LocalTask>
 
     /**
      * One-shot query that only runs once and return snapshot of Tasks
      * Sort By DESC
      */
-    @Query("SELECT * FROM task ORDER BY title DESC")
-    suspend fun getAllSortByDESC(): List<TaskEntity>
+    @Query("SELECT * FROM task ORDER BY task DESC")
+    suspend fun getAllSortByDESC(): List<LocalTask>
 
     /**
      * get task by date
      * @param taskDate date of the task
      */
     @Query("SELECT * from task WHERE date = :taskDate")
-    suspend fun getTasksByDate(taskDate: String): List<TaskEntity>
+    suspend fun getTasksByDate(taskDate: String): List<LocalTask>
 
     /**
      * get task by time
      * @param taskTime time of the task
      */
     @Query("SELECT * from task WHERE time = :taskTime")
-    suspend fun getTasksByTime(taskTime: String): List<TaskEntity>
+    suspend fun getTasksByTime(taskTime: String): List<LocalTask>
 
     /**
      * get task by id
      * @param taskId id of the task
      */
     @Query("SELECT * FROM task WHERE id = :taskId")
-    suspend fun getTaskById(taskId: Int): TaskEntity
+    suspend fun getTaskById(taskId: Int): LocalTask?
 
     /**
-     * Insert one or more tasks.
+     * Insert or update task.
      */
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(vararg task: TaskEntity)
+    @Upsert
+    suspend fun upsert(task: LocalTask)
 
     /**
      * Update task.
      */
     @Update
-    suspend fun update(task: TaskEntity)
+    suspend fun update(task: LocalTask)
 
     /**
      * Update the complete status of  task
@@ -81,7 +82,7 @@ interface TaskDao {
      * Delete task.
      */
     @Delete
-    suspend fun delete(task: TaskEntity)
+    suspend fun delete(task: LocalTask)
 
     /**
      * Delete a task by id.
