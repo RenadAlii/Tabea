@@ -1,7 +1,7 @@
 package com.renad.tabea.data
 
 import com.renad.tabea.data.local.LocalTask
-import com.renad.tabea.data.model.Task
+import com.renad.tabea.domain.model.Task
 
 /**
  * Data model mapping extension functions. There are 2 model types:

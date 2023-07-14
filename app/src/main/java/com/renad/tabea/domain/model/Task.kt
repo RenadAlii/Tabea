@@ -1,4 +1,4 @@
-package com.renad.tabea.data.model
+package com.renad.tabea.domain.model
 
 import com.renad.tabea.core.util.DateUtil
 import com.renad.tabea.core.util.DateUtil.getDate
@@ -17,13 +17,14 @@ data class Task(
     val isTaskDueToday get() = date?.getDate()?.compareTo(DateUtil.dateOfToday()) == 0
     val isTaskDayPast get() = date?.getDate()?.before(DateUtil.dateOfToday()) == true
     val isTaskTimePast get() = DateUtil.currentTime()?.after(time?.getTime()) == true
-    val taskState: TaskState get() = if (!isCompleted) {
-        if (isTaskDayPast || isTaskDueToday && isTaskTimePast) {
-            TaskState.MISS
+    val taskState: TaskState
+        get() = if (!isCompleted) {
+            if (isTaskDayPast || isTaskDueToday && isTaskTimePast) {
+                TaskState.MISS
+            } else {
+                TaskState.ACTIVE
+            }
         } else {
-            TaskState.ACTIVE
+            TaskState.COMPLETE
         }
-    } else {
-        TaskState.COMPLETE
-    }
 }

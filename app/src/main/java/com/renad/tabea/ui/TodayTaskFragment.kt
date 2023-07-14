@@ -9,13 +9,16 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.renad.tabea.R
+import com.renad.tabea.core.util.DateUtil.dateFormatter
 import com.renad.tabea.core.util.DateUtil.dateOfToday
+import com.renad.tabea.core.util.DateUtil.getDate
 import com.renad.tabea.data.DataSource
-import com.renad.tabea.data.model.Task
+import com.renad.tabea.domain.model.Task
 import com.renad.tabea.databinding.FragmentTodayTaskBinding
 import com.renad.tabea.ui.completed.CompletedTaskAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-
+@AndroidEntryPoint
 class TodayTaskFragment : Fragment() {
 
     private var _binding: FragmentTodayTaskBinding? = null
@@ -46,9 +49,7 @@ class TodayTaskFragment : Fragment() {
         taskAdapter = CompletedTaskAdapter(::onTaskClicked, ::onTaskChecked)
         binding.recyclerView.adapter = taskAdapter
         val todayTasks = myDataset.filter {
-            val dateTodo = it.date
-            val sdf = SimpleDateFormat("dd/MM/yyyy")
-            val date = sdf.parse(dateTodo)
+            val date = it.date?.getDate()
             date == (dateOfToday())
         }
         taskAdapter?.submitList(todayTasks)

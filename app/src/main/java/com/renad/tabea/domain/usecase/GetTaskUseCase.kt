@@ -1,11 +1,11 @@
-package com.renad.tabea.domain
+package com.renad.tabea.domain.usecase
 
 import android.content.Context
 import com.renad.tabea.R
 import com.renad.tabea.core.util.Dispatcher
 import com.renad.tabea.core.util.Response
-import com.renad.tabea.data.TaskRepository
-import com.renad.tabea.data.model.Task
+import com.renad.tabea.domain.TaskRepository
+import com.renad.tabea.domain.model.Task
 import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -22,7 +22,7 @@ class GetTaskUseCase @Inject constructor(
      *
      * @param taskId - the field used to sort the tasks. Default NONE = ASC sort.
      */
-     operator fun invoke(taskId: Int): Flow<Response<Task>> {
+    operator fun invoke(taskId: Int): Flow<Response<Task>> {
         return taskRepository.getTaskById(taskId).transform { response ->
             when (response) {
                 is Response.Success -> {
@@ -30,6 +30,7 @@ class GetTaskUseCase @Inject constructor(
                         emit(Response.Failure(context.getString(R.string.task_not_found)))
                     }
                 }
+
                 else -> {}
             }
         }.flowOn(dispatcher.io)

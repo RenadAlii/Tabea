@@ -10,8 +10,8 @@ import com.renad.tabea.core.util.DateUtil.getTime
 import com.renad.tabea.core.util.Dispatcher
 import com.renad.tabea.core.util.Response
 import com.renad.tabea.core.util.WhileUiSubscribed
-import com.renad.tabea.data.TaskRepository
-import com.renad.tabea.data.model.Task
+import com.renad.tabea.domain.TaskRepository
+import com.renad.tabea.domain.model.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.flow.MutableStateFlow

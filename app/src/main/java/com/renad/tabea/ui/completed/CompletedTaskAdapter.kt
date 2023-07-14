@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.renad.tabea.core.util.DateUtil.dateFormatter
-import com.renad.tabea.data.model.Task
+import com.renad.tabea.domain.model.Task
 import com.renad.tabea.databinding.ListoftodoBinding
 
 class CompletedTaskAdapter(val onItemClicked: () -> Unit, val onTaskCheked: (Task) -> Unit) :

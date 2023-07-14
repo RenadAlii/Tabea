@@ -1,7 +1,7 @@
-package com.renad.tabea.data
+package com.renad.tabea.domain
 
 import com.renad.tabea.core.util.Response
-import com.renad.tabea.data.model.Task
+import com.renad.tabea.domain.model.Task
 import kotlinx.coroutines.flow.Flow
 
 interface TaskRepository {

@@ -3,7 +3,8 @@ package com.renad.tabea.data
 import com.renad.tabea.core.util.Dispatcher
 import com.renad.tabea.core.util.Response
 import com.renad.tabea.data.local.TaskDao
-import com.renad.tabea.data.model.Task
+import com.renad.tabea.domain.model.Task
+import com.renad.tabea.domain.TaskRepository
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow

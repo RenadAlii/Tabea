@@ -2,7 +2,7 @@ package com.renad.tabea.data
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.renad.tabea.data.model.Task
+import com.renad.tabea.domain.model.Task
 
 object DataSource {
     var taskList: MutableList<Task> = mutableListOf(

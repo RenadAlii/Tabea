@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.renad.tabea.core.util.DateUtil.dateFormatter
 import com.renad.tabea.data.DataSource
-import com.renad.tabea.data.model.Task
-import com.renad.tabea.data.model.TaskState
+import com.renad.tabea.domain.model.Task
+import com.renad.tabea.domain.model.TaskState
 import java.util.*
 
 class TodoViewModel : ViewModel() {

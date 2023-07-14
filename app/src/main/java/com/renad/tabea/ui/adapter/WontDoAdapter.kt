@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.renad.tabea.R
 import com.renad.tabea.core.util.DateUtil
 import com.renad.tabea.core.util.DateUtil.getDate
-import com.renad.tabea.data.model.Task
+import com.renad.tabea.domain.model.Task
 import com.renad.tabea.ui.TodoViewModel
 import java.text.SimpleDateFormat
 

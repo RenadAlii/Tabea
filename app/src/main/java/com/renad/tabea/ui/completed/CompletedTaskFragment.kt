@@ -10,10 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.renad.tabea.data.DataSource
-import com.renad.tabea.data.model.Task
 import com.renad.tabea.databinding.FragmentCompletedTaskBinding
+import com.renad.tabea.domain.model.Task
 import com.renad.tabea.ui.TodoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CompletedTaskFragment : Fragment() {
 
     private var _binding: FragmentCompletedTaskBinding? = null
