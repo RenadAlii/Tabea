@@ -16,7 +16,7 @@ import javax.annotation.Nonnull
 
 @Entity(tableName = "task")
 data class LocalTask(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int?,
     @Nonnull val task: String,
     val details: String?,
     val time: String?,

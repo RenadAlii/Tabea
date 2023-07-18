@@ -31,4 +31,8 @@
     <string name="task_not_found">Task not found</string>
     <string name="task_added_successfully">Task added successfully</string>
     <string name="empty_task_msg">Please don\'t let any information empty</string>
+    <string name="unknown_error_occurred">"An unknown error occurred."</string>
+    <string name="all_tasks_are_deleted">All tasks are deleted.</string>
+    <string name="could_not_delete_tasks">Could\'nt delete the tasks, Try Again.</string>
+    <string name="could_not_delete_task">Could\'nt delete the task, Try Again.</string>
 </resources>

@@ -15,14 +15,16 @@ import com.renad.tabea.domain.model.Task
  */
 
 // External to local
-fun Task.toLocal() = LocalTask(
-    id = id,
-    task = task,
-    details = details,
-    isCompleted = isCompleted,
-    time = time,
-    date = date,
-)
+fun Task.toLocal() =
+    LocalTask(
+        id = id,
+        task = task,
+        details = details,
+        isCompleted = isCompleted,
+        time = time,
+        date = date,
+    )
+
 
 fun List<Task>.toLocal() = map(Task::toLocal)
 

@@ -1,5 +1,6 @@
 package com.renad.tabea.data
 
+import com.renad.tabea.R
 import com.renad.tabea.core.util.Dispatcher
 import com.renad.tabea.core.util.Response
 import com.renad.tabea.data.local.TaskDao
@@ -50,7 +51,7 @@ class TaskRepositoryImp @Inject constructor(
         localDataSource.delete(task.toLocal())
     }.flowOn(dispatcher.io)
 
-    override fun deleteById(taskId: String) = flowCall {
+    override fun deleteById(taskId: Int) = flowCall {
         localDataSource.deleteById(taskId)
     }.flowOn(dispatcher.io)
 
@@ -63,7 +64,7 @@ fun <T> TaskRepository.flowCall(block: suspend () -> T) = callbackFlow {
     try {
         this.send(Response.Success(block()))
     } catch (e: Throwable) {
-        this.trySend(Response.Failure(e.message ?: "An unknown error occurred."))
+        this.trySend(Response.Failure(R.string.unknown_error_occurred))
     }
     awaitClose { println("flowCall closed!") }
 }

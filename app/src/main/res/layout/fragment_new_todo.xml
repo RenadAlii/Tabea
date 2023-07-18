@@ -5,15 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.renad.tabea.ui.TodoViewModel" />
-        <variable
-            name="newTodoFragment"
-            type="com.renad.tabea.ui.add.NewTodoFragment" />
-    </data>
-
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -44,7 +35,6 @@
         android:layout_marginBottom="12dp"
         android:textColorHint="@color/yellow_400">
         <com.google.android.material.textfield.TextInputEditText
-            android:text="@={viewModel.toDo}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -112,7 +102,6 @@ style="@style/text_view_style"
             android:layout_marginStart="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
-            android:onClick="@{() -> newTodoFragment.showDatePicker()}"
             android:layout_marginBottom="0dp"
             android:src="@drawable/calendar" />
 
@@ -124,7 +113,6 @@ style="@style/text_view_style"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="0dp"
-            android:onClick="@{() -> newTodoFragment.showTimePicker()}"
             android:src="@drawable/stopwatch" />
 
 
@@ -145,7 +133,6 @@ style="@style/text_view_style"
         android:layout_marginStart="60dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="16dp"
-        android:onClick="@{() -> newTodoFragment.goToAddDataOrShowToast()}"
         android:text="@string/add" />
 
 </LinearLayout>

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.renad.tabea.core.util.DateUtil.dateFormatter
 import com.renad.tabea.data.DataSource
 import com.renad.tabea.domain.model.Task
-import com.renad.tabea.domain.model.TaskState
 import java.util.*
 
 class TodoViewModel : ViewModel() {
@@ -72,16 +71,16 @@ class TodoViewModel : ViewModel() {
     fun addTodoTask(todoText: String, details: String?) {
         setTodo(todoText)
         setDescription(details)
-        addNewTask(
-            Task(
-                _toDoTitle.value.toString(),
-                _description.value.toString(),
-                _time.value.toString(),
-                _date.value.toString(),
-                false,
-                TaskState.ACTIVE,
-            ),
-        )
+//        addNewTask(
+//            Task(id = null,
+//                task = _toDoTitle.value.toString(),
+//                _description.value.toString(),
+//                _time.value.toString(),
+//                _date,
+//                false,
+//                TaskState.ACTIVE,
+//            ),
+//        )
     }
 
     fun setIsCompleted(task: Task) {
@@ -106,13 +105,11 @@ class TodoViewModel : ViewModel() {
     }
 
     fun sortByASC() {
-        DataSource.sortByAES()
         println(DataSource.taskList)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun sortByDES() {
-        DataSource.sortByDES()
         println(DataSource.taskList)
     }
 

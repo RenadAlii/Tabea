@@ -2,8 +2,6 @@ package com.renad.tabea.data.local
 
 import androidx.room.Dao
 import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Upsert
@@ -88,7 +86,7 @@ interface TaskDao {
      * Delete a task by id.
      */
     @Query("DELETE FROM task WHERE id = :taskId")
-    suspend fun deleteById(taskId: String)
+    suspend fun deleteById(taskId: Int)
 
     /**
      * Delete all tasks.

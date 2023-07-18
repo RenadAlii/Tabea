@@ -1,7 +1,5 @@
 package com.renad.tabea.data
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.renad.tabea.domain.model.Task
 
 object DataSource {
@@ -29,8 +27,6 @@ object DataSource {
         println("here= " + taskList[position])
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun sortByDES() = taskList.sortWith(compareBy<Task> { it.task[0].uppercase() }.reversed())
     fun sortByDate() {
 //        taskList.sortWith(
 //            compareBy<Task> {
@@ -40,8 +36,6 @@ object DataSource {
 //        )
         println(taskList)
     }
-
-    fun sortByAES() = taskList.sortWith(compareBy { it.task[0].uppercase() })
 
     fun clearList() = taskList.clear()
 }

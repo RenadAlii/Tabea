@@ -6,7 +6,7 @@ import com.renad.tabea.core.util.DateUtil.getTime
 
 data class Task(
     val id: Int?,
-    val task: String?,
+    val task: String,
     val details: String?,
     val time: String?,
     val date: Long?,

@@ -22,7 +22,7 @@ interface TaskRepository {
 
     fun delete(task: Task): Flow<Response<Unit>>
 
-    fun deleteById(taskId: String): Flow<Response<Unit>>
+    fun deleteById(taskId: Int): Flow<Response<Unit>>
 
     fun deleteAll(): Flow<Response<Unit>>
 }
