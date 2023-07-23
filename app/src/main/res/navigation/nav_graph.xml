@@ -1,63 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/inboxfragment">
+    app:startDestination="@id/inBoxFragment">
 
     <fragment
-        android:id="@+id/inboxfragment"
+        android:id="@+id/inBoxFragment"
         android:name="com.renad.tabea.ui.inBox.InBoxFragment"
-        android:label="InBox">
+        android:label="inBoxFragment">
         <action
-            android:id="@+id/action_theListOfTodoFragment_to_newTodoFragment"
-            app:destination="@id/editTodoFragment" />
-        <action
-            android:id="@+id/action_theListOfTodoFragment_to_editTodoFragment"
-            app:destination="@id/editTodoFragment" />
+            android:id="@+id/action_theListOfTodoFragment_to_upsertTaskFragment"
+            app:destination="@id/upsertTaskFragment" />
+
     </fragment>
     <fragment
-        android:id="@+id/editTodoFragment"
+        android:id="@+id/upsertTaskFragment"
         android:name="com.renad.tabea.ui.upsert.UpsertTaskFragment"
-        android:label="Edit">
+        android:label="UpsertTaskFragment">
         <argument
             android:name="taskId"
-            app:argType="integer" />
+            app:argType="string"
+            app:nullable="true"/>
         <action
             android:id="@+id/action_editTodoFragment_to_theListOfTodoFragment"
-            app:destination="@id/inboxfragment" />
-        <action
-            android:id="@+id/action_editTodoFragment_pop_including_inboxfragment"
-            app:popUpTo="@id/inboxfragment"
-            app:popUpToInclusive="true" />
-
-
+            app:destination="@id/inBoxFragment" />
     </fragment>
     <fragment
         android:id="@+id/completedTaskFragment"
         android:name="com.renad.tabea.ui.completed.CompletedTaskFragment"
         android:label="Completed Task">
         <action
-            android:id="@+id/action_completedTaskFragment_to_editTodoFragment"
-            app:destination="@id/editTodoFragment" />
+            android:id="@+id/action_completedTaskFragment_to_upsertTaskFragment"
+            app:destination="@id/upsertTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/wontDoFragment"
         android:name="com.renad.tabea.ui.WontDoFragment"
         android:label="Won't do">
         <action
-            android:id="@+id/action_wontDoFragment_to_editTodoFragment"
-            app:destination="@id/editTodoFragment" />
+            android:id="@+id/action_wontDoFragment_to_upsertTaskFragment"
+            app:destination="@id/upsertTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/todayTaskFragment"
         android:name="com.renad.tabea.ui.TodayTaskFragment"
         android:label="Today">
         <action
-            android:id="@+id/action_todayTaskFragment_to_editTodoFragment"
-            app:destination="@id/editTodoFragment" />
-        <action
-            android:id="@+id/action_todayTaskFragment_to_newTodoFragment"
-            app:destination="@id/editTodoFragment" />
+            android:id="@+id/action_wontDoFragment_to_upsertTaskFragment"
+            app:destination="@id/upsertTaskFragment" />
     </fragment>
 </navigation>

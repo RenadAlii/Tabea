@@ -35,4 +35,5 @@
     <string name="all_tasks_are_deleted">All tasks are deleted.</string>
     <string name="could_not_delete_tasks">Could\'nt delete the tasks, Try Again.</string>
     <string name="could_not_delete_task">Could\'nt delete the task, Try Again.</string>
+    <string name="ready_for_some_new_tasks_tap_plus_to_write_them_down">Ready for some new tasks? Tap + to write them down.</string>
 </resources>

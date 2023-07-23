@@ -32,14 +32,14 @@ fun Fragment.showDatePicker(clickAction: (isCancel: Boolean, date: Long?) -> Uni
  * displays the TimePicker for selecting the task's time deadline.
  */
 fun Fragment.showTimePicker(clickAction: (isCancel: Boolean, time: String) -> Unit) {
-    // get system time format.
     val clockFormat = getSystemHourFormat()
-
     // set timepicker TimeFormat, Input Mode as keyboard & Title.
     val timePicker = MaterialTimePicker.Builder()
         .setTimeFormat(clockFormat)
         .setTitleText(getString(R.string.select_time))
+        .setHour(12)
         .setInputMode(INPUT_MODE_KEYBOARD).build()
+
     timePicker.addOnPositiveButtonClickListener {
         clickAction(false, "${timePicker.hour}:${timePicker.minute}")
     }
