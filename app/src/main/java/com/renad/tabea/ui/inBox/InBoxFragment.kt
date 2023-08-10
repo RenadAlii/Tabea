@@ -1,10 +1,8 @@
 package com.renad.tabea.ui.inBox
 
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.PopupMenu
-import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.renad.tabea.R
+import com.renad.tabea.core.extensions.addMenuProvider
 import com.renad.tabea.core.extensions.collectFlow
 import com.renad.tabea.core.extensions.showToast
 import com.renad.tabea.databinding.FragmentInBoxBinding
@@ -33,11 +32,6 @@ class InBoxFragment : Fragment() {
     private var inBoxAdapter: InBoxAdapter? = null
     private val viewModel by viewModels<InBoxViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(false)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,9 +42,47 @@ class InBoxFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
+        bindMenu()
         initViews()
         observeState()
+    }
+
+    private fun bindMenu() {
+        addMenuProvider(R.menu.sort_clear_menu) {
+            when (it.itemId) {
+                R.id.clearList -> {
+                    showWarningDialog()
+                    true
+                }
+
+                R.id.sortByAES -> {
+                    sendSortTaskEvent(SortType.ASC)
+                    true
+                }
+
+                R.id.sortByDES -> {
+                    sendSortTaskEvent(SortType.DES)
+                    true
+                }
+
+                R.id.sortByDate -> {
+                    sendSortTaskEvent(SortType.DATE)
+                    true
+                }
+
+                R.id.sortByTime -> {
+                    sendSortTaskEvent(SortType.TIME)
+                    true
+                }
+
+                else -> {
+                    NavigationUI.onNavDestinationSelected(
+                        it,
+                        requireView().findNavController(),
+                    )
+                }
+            }
+        }
     }
 
     private fun initViews() {
@@ -125,47 +157,6 @@ class InBoxFragment : Fragment() {
             }
         }
         popupMenu.show()
-    }
-
-    // inflate the sort_delete menu
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.sort_clear_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    // create action when clicking on the menu item
-    @RequiresApi(Build.VERSION_CODES.N)
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.clearList -> {
-                showWarningDialog()
-                return true
-            }
-
-            R.id.sortByAES -> {
-                sendSortTaskEvent(SortType.ASC)
-                return true
-            }
-
-            R.id.sortByDES -> {
-                sendSortTaskEvent(SortType.DES)
-                return true
-            }
-
-            R.id.sortByDate -> {
-                sendSortTaskEvent(SortType.DATE)
-                return true
-            }
-
-            R.id.sortByTime -> {
-                sendSortTaskEvent(SortType.TIME)
-                return true
-            }
-        }
-        return NavigationUI.onNavDestinationSelected(
-            item,
-            requireView().findNavController(),
-        ) || super.onOptionsItemSelected(item)
     }
 
     private fun sendSortTaskEvent(sortType: SortType) {
