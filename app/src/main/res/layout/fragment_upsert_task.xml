@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="editTodoFragment"
-            type="com.renad.tabea.ui.upsert.UpsertTaskFragment" />
-    </data>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -139,9 +132,7 @@
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="20dp"
-                android:onClick="@{() -> editTodoFragment.editDataOrShowToast()}"
                 tools:text="@string/add" />
-
 
         </LinearLayout>
     </ScrollView>

@@ -9,7 +9,7 @@ object DateUtil {
 
     fun dateFormatter(): SimpleDateFormat = SimpleDateFormat("d MMM yyyy", Locale.getDefault())
 
-    fun timeFormatter(): SimpleDateFormat = SimpleDateFormat("d MMM yyyy", Locale.getDefault())
+    private fun timeFormatter(): SimpleDateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
     fun Long.getDate(): Date? = dateFormatter().parse(dateFormatter().format(this))
 

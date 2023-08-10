@@ -1,6 +1,9 @@
 package com.renad.tabea.domain.usecase
 
-data class TaskUseCases(
-    val getTaskUseCase: GetTaskUseCase,
+data class InBoxScreenUseCases(
     val getTasksUseCase: GetTasksUseCase,
+    val deleteTaskUseCase: DeleteTaskUseCase,
+    val deleteAllTasksUseCase: DeleteAllTasksUseCase,
+    val addTaskUseCase: AddTaskUseCase,
+    val completeTaskUseCase: CompleteTaskUseCase,
 )

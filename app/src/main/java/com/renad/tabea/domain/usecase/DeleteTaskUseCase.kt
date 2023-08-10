@@ -25,7 +25,9 @@ class DeleteTaskUseCase @Inject constructor(
                     emit(Response.Failure(R.string.could_not_delete_task))
                 }
 
-                else -> {}
+                else -> {
+                    emit(response)
+                }
             }
         }.flowOn(dispatcher.io)
     }

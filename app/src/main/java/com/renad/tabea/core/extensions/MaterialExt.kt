@@ -16,9 +16,9 @@ fun Fragment.showDatePicker(clickAction: (isCancel: Boolean, date: Long?) -> Uni
     val constraintsBuilder = CalendarConstraints.Builder()
         .setValidator(DateValidatorPointForward.now())
 
-    /* 1- set title of DatePicker,
-      2- Opens the date picker with today's date selected,
-      3- set Validator. */
+    /** 1- set title of DatePicker,
+     2- Opens the date picker with today's date selected,
+     3- set Validator. */
     val datePicker = MaterialDatePicker.Builder.datePicker()
         .setTitleText(getString(R.string.select_date))
         .setSelection(MaterialDatePicker.todayInUtcMilliseconds())

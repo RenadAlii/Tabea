@@ -4,12 +4,14 @@ import com.renad.tabea.R
 import com.renad.tabea.core.util.Dispatcher
 import com.renad.tabea.core.util.Response
 import com.renad.tabea.data.local.TaskDao
-import com.renad.tabea.domain.model.Task
 import com.renad.tabea.domain.TaskRepository
+import com.renad.tabea.domain.model.SortType
+import com.renad.tabea.domain.model.Task
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,16 +21,19 @@ class TaskRepositoryImp @Inject constructor(
     private val dispatcher: Dispatcher,
 ) : TaskRepository {
 
-    override fun getAllTasks(): Flow<Response<List<Task>>> {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAllTasksSortByASC(): Flow<Response<List<Task>>> = flowCall {
-        localDataSource.getAllTasksSortByASC().toExternal()
+    override fun getAllTasks() = localDataSource.getAllTasks().map {
+        try {
+            Response.Success(it.toExternal())
+        } catch (e: Throwable) {
+            Response.Failure(R.string.unknown_error_occurred)
+        }
     }.flowOn(dispatcher.io)
 
-    override fun getAllSortByDESC(): Flow<Response<List<Task>>> = flowCall {
-        localDataSource.getAllSortByDESC().toExternal()
+    override fun getAllTasksSorted(sortType: SortType) = flowCall {
+        when (sortType) {
+            SortType.DES -> localDataSource.getAllSortByDESC().toExternal()
+            else -> localDataSource.getAllTasksSortByASC().toExternal()
+        }
     }.flowOn(dispatcher.io)
 
     override fun getTaskById(taskId: Int): Flow<Response<Task?>> = flowCall {
@@ -43,7 +48,7 @@ class TaskRepositoryImp @Inject constructor(
         localDataSource.update(task.toLocal())
     }.flowOn(dispatcher.io)
 
-    override fun updateCompleted(taskId: String, completed: Boolean) = flowCall {
+    override fun updateCompleted(taskId: Int, completed: Boolean) = flowCall {
         localDataSource.updateCompleted(taskId, completed)
     }.flowOn(dispatcher.io)
 
@@ -60,7 +65,7 @@ class TaskRepositoryImp @Inject constructor(
     }.flowOn(dispatcher.io)
 }
 
-fun <T> TaskRepository.flowCall(block: suspend () -> T) = callbackFlow {
+fun <T> flowCall(block: suspend () -> T) = callbackFlow {
     try {
         this.send(Response.Success(block()))
     } catch (e: Throwable) {

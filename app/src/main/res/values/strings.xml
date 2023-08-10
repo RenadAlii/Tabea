@@ -21,7 +21,9 @@
     <string name="sort_by_asc">Sort By ASC</string>
     <string name="sort_by_des">Sort By DES</string>
     <string name="sort_by_date">Sort By Date</string>
-    <string name="filter">filter</string>
+    <string name="sort_by_time">Sort By Time</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
     <string name="inbox">InBox</string>
     <string name="today">Today</string>
     <string name="completed_task">Completed Task</string>
@@ -36,4 +38,5 @@
     <string name="could_not_delete_tasks">Could\'nt delete the tasks, Try Again.</string>
     <string name="could_not_delete_task">Could\'nt delete the task, Try Again.</string>
     <string name="ready_for_some_new_tasks_tap_plus_to_write_them_down">Ready for some new tasks? Tap + to write them down.</string>
+    <string name="details">Details:</string>
 </resources>

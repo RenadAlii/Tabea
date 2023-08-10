@@ -7,7 +7,7 @@ import javax.annotation.Nonnull
 
 /**
  *  @see LocalTask is a table for tasks.
- *  @param title represents the task title, such as "study for my math exam".
+ *  @param task represents the task, such as "study for my math exam".
  *  @param details represents the task details, such as "from chapter 1 to 3" it's optional.
  *  @param time represents the time at which the task should be completed, it's optional.
  *  @param date represents the deadline for completing the task, it's optional.

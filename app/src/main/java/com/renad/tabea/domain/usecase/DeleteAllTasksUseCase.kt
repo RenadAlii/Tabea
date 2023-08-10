@@ -1,11 +1,9 @@
 package com.renad.tabea.domain.usecase
 
-import android.content.Context
 import com.renad.tabea.R
 import com.renad.tabea.core.util.Dispatcher
 import com.renad.tabea.core.util.Response
 import com.renad.tabea.domain.TaskRepository
-import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.transform
@@ -25,7 +23,7 @@ class DeleteAllTasksUseCase @Inject constructor(
         return taskRepository.deleteAll().transform { response ->
             when (response) {
                 is Response.Failure -> emit(Response.Failure(R.string.could_not_delete_tasks))
-                else -> {}
+                else -> { emit(response) }
             }
         }.flowOn(dispatcher.io)
     }

@@ -6,14 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.renad.tabea.R
 import com.renad.tabea.core.util.DateUtil
-import com.renad.tabea.core.util.DateUtil.getTime
+import com.renad.tabea.core.util.DateUtil.getDate
 import com.renad.tabea.core.util.Dispatcher
 import com.renad.tabea.core.util.Response
+import com.renad.tabea.core.util.SingleEvent
 import com.renad.tabea.core.util.WhileUiSubscribed
 import com.renad.tabea.domain.TaskRepository
 import com.renad.tabea.domain.model.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOn
@@ -29,10 +29,10 @@ class UpsertTaskViewModel @Inject constructor(
     private val taskRepository: TaskRepository,
     private val dispatcher: Dispatcher,
     savedStateHandle: SavedStateHandle,
-    @ActivityContext val context: Context,
 ) : ViewModel() {
 
-    private val taskId: Int? = UpsertTaskFragmentArgs.fromSavedStateHandle(savedStateHandle).taskId
+    private val taskId: Int? =
+        UpsertTaskFragmentArgs.fromSavedStateHandle(savedStateHandle).taskId?.toIntOrNull()
 
     private val _uiState = MutableStateFlow(UpsertTaskUiState())
 
@@ -41,6 +41,9 @@ class UpsertTaskViewModel @Inject constructor(
         started = WhileUiSubscribed,
         initialValue = UpsertTaskUiState(isLoading = true),
     )
+
+    private var _date: MutableStateFlow<Long?> = MutableStateFlow(null)
+    val date get() = _date
 
     init {
         if (taskId != null) setTask()
@@ -59,7 +62,7 @@ class UpsertTaskViewModel @Inject constructor(
                 is Response.Failure -> {
                     _uiState.update {
                         it.copy(
-                            errorMsg = task.message,
+                            errorMsg = SingleEvent(task.messageId),
                             isLoading = false,
                         )
                     }
@@ -67,13 +70,17 @@ class UpsertTaskViewModel @Inject constructor(
 
                 is Response.Success -> {
                     val taskDetails = task.data
+                    val taskDate = taskDetails?.date
+                    _date.update { taskDate }
                     _uiState.update {
                         it.copy(
                             task = taskDetails?.task ?: "",
                             time = taskDetails?.time,
-                            date = DateUtil.dateFormatter().format(taskDetails?.date),
+                            date = taskDate?.getDate()
+                                ?.let { stringDate -> DateUtil.dateFormatter().format(stringDate) },
                             isLoading = false,
                             isCompleted = taskDetails?.isCompleted ?: false,
+                            description = taskDetails?.details ?: "",
                         )
                     }
                 }
@@ -85,23 +92,24 @@ class UpsertTaskViewModel @Inject constructor(
         when (event) {
             is UpsertTaskEvent.ShowDatePicker -> {
                 _uiState.update {
-                    it.copy(showDatePicker = true)
+                    it.copy(showDatePicker = SingleEvent(Unit))
                 }
             }
 
             is UpsertTaskEvent.HideDatePicker -> {
-                _uiState.update {
-                    it.copy(
-                        showDatePicker = false,
-                        date = if (!event.isCancel) event.date.toString() else it.date,
-                    )
+                if (!event.isCancel) {
+                    _date.update { event.date }
+                    _uiState.update {
+                        it.copy(
+                            date = DateUtil.dateFormatter().format(event.date?.getDate()!!),
+                        )
+                    }
                 }
             }
 
             is UpsertTaskEvent.HideTimePicker -> {
                 _uiState.update {
                     it.copy(
-                        showTimePicker = false,
                         time = if (!event.isCancel) event.time else it.time,
                     )
                 }
@@ -109,7 +117,7 @@ class UpsertTaskViewModel @Inject constructor(
 
             UpsertTaskEvent.ShowTimePicker -> {
                 _uiState.update {
-                    it.copy(showTimePicker = true)
+                    it.copy(showTimePicker = SingleEvent(Unit))
                 }
             }
 
@@ -129,22 +137,22 @@ class UpsertTaskViewModel @Inject constructor(
                 task = task,
                 details = description,
                 time = time,
-                date = date?.getTime()?.time,
+                date = _date.value,
             ),
         ).onStart { _uiState.update { it.copy(isLoading = true) } }.map { response ->
             when (response) {
                 is Response.Failure -> _uiState.update {
                     it.copy(
-                        errorMsg = response.message,
+                        errorMsg = SingleEvent(response.messageId),
                         isLoading = false,
                     )
                 }
 
                 is Response.Success -> _uiState.update {
                     it.copy(
-                        errorMsg = context.getString(R.string.task_added_successfully),
+                        errorMsg = SingleEvent(R.string.task_added_successfully),
                         isLoading = false,
-                        navigateBack = true,
+                        navigateBack = SingleEvent(Unit),
                     )
                 }
 
@@ -154,16 +162,8 @@ class UpsertTaskViewModel @Inject constructor(
     }
 
     // fun to check if the data is not null
-    fun isDataNotEmpty(todoText: String, time: String, date: String): Boolean =
-        isTodoTaskNotEmpty(todoText) && isTimeNotEmpty(time) && isDateNotEmpty(date)
-
-    private fun isDateNotEmpty(date: String): Boolean = date != ""
-
-    private fun isTimeNotEmpty(time: String): Boolean = time != ""
+    fun isValidTask(todoText: String): Boolean =
+        isTodoTaskNotEmpty(todoText)
 
     private fun isTodoTaskNotEmpty(todoText: String): Boolean = todoText != ""
-
-    fun messageShown() {
-        _uiState.update { it.copy(errorMsg = null) }
-    }
 }

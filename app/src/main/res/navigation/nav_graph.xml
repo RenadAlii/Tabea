@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/inBoxFragment"
         android:name="com.renad.tabea.ui.inBox.InBoxFragment"
-        android:label="inBoxFragment">
+        android:label="In Box">
+        <argument
+            android:name="listStatus"
+            android:defaultValue="IN_BOX"
+            app:argType="com.renad.tabea.ui.inBox.TasksStatus" />
         <action
             android:id="@+id/action_theListOfTodoFragment_to_upsertTaskFragment"
             app:destination="@id/upsertTaskFragment" />
@@ -16,37 +20,51 @@
     <fragment
         android:id="@+id/upsertTaskFragment"
         android:name="com.renad.tabea.ui.upsert.UpsertTaskFragment"
-        android:label="UpsertTaskFragment">
+        android:label="Edit or Add Task">
         <argument
             android:name="taskId"
             app:argType="string"
-            app:nullable="true"/>
+            app:nullable="true" />
         <action
-            android:id="@+id/action_editTodoFragment_to_theListOfTodoFragment"
+            android:id="@+id/action_to_inBoxFragment"
             app:destination="@id/inBoxFragment" />
     </fragment>
     <fragment
         android:id="@+id/completedTaskFragment"
-        android:name="com.renad.tabea.ui.completed.CompletedTaskFragment"
-        android:label="Completed Task">
+        android:name="com.renad.tabea.ui.inBox.InBoxFragment"
+        android:label="Completed Tasks">
+        <argument
+            android:name="listStatus"
+            android:defaultValue="COMPLETED"
+            app:argType="com.renad.tabea.ui.inBox.TasksStatus" />
         <action
-            android:id="@+id/action_completedTaskFragment_to_upsertTaskFragment"
+            android:id="@+id/action_theListOfTodoFragment_to_upsertTaskFragment"
             app:destination="@id/upsertTaskFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/wontDoFragment"
-        android:name="com.renad.tabea.ui.WontDoFragment"
-        android:label="Won't do">
+        android:name="com.renad.tabea.ui.inBox.InBoxFragment"
+        android:label="Past Tasks">
+        <argument
+            android:name="listStatus"
+            android:defaultValue="PAST"
+            app:argType="com.renad.tabea.ui.inBox.TasksStatus" />
         <action
-            android:id="@+id/action_wontDoFragment_to_upsertTaskFragment"
+            android:id="@+id/action_theListOfTodoFragment_to_upsertTaskFragment"
             app:destination="@id/upsertTaskFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/todayTaskFragment"
-        android:name="com.renad.tabea.ui.TodayTaskFragment"
-        android:label="Today">
+        android:name="com.renad.tabea.ui.inBox.InBoxFragment"
+        android:label="Today Task">
+        <argument
+            android:name="listStatus"
+            android:defaultValue="TODAY"
+            app:argType="com.renad.tabea.ui.inBox.TasksStatus" />
         <action
-            android:id="@+id/action_wontDoFragment_to_upsertTaskFragment"
+            android:id="@+id/action_theListOfTodoFragment_to_upsertTaskFragment"
             app:destination="@id/upsertTaskFragment" />
     </fragment>
 </navigation>

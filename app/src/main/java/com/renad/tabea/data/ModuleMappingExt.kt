@@ -25,7 +25,6 @@ fun Task.toLocal() =
         date = date,
     )
 
-
 fun List<Task>.toLocal() = map(Task::toLocal)
 
 // Local to External

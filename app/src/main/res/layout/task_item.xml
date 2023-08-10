@@ -13,10 +13,12 @@
     android:layout_marginBottom="4dp"
     app:cardCornerRadius="0dp"
     app:cardElevation="1dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -36,12 +38,12 @@
                 android:id="@+id/todoTaskText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="renaaaaaaaaaaaaaaaaaaaaad"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/todocheckbox"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="30dp"
-                tools:layout_editor_absoluteY="16dp">
+                tools:layout_editor_absoluteY="16dp"
+                tools:text="renaaaaaaaaaaaaaaaaaaaaad">
 
             </com.google.android.material.textview.MaterialTextView>
 
@@ -49,14 +51,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ellipsisImageButton"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="16dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    android:paddingLeft="18dp"
+                    android:paddingRight="18dp"
                     android:src="@drawable/ellipsis__1_"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -72,12 +77,15 @@
             android:layout_marginTop="@dimen/side_margin"
             android:layout_marginBottom="5dp" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/expand"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="12dp"
             android:src="@drawable/down"
             android:visibility="visible" />
 
@@ -86,7 +94,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/detailsTitle"
@@ -96,9 +105,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp"
                 android:labelFor="@+id/details"
-                android:text="Details:"
+                android:text="@string/details"
                 android:textColor="@color/darkGray"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -110,7 +119,7 @@
                 android:layout_marginBottom="16dp"
                 android:text="@string/app_name"
                 android:textColor="@color/lightGray"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -123,8 +132,8 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="30dp"
                     android:background="@drawable/oval_button"
-                    android:text="17/30/2021"
-                    android:textSize="12dp" />
+                    android:textSize="12sp"
+                    tools:text="17/30/2021" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/timeText"
@@ -132,18 +141,23 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
                     android:background="@drawable/oval_button"
-                    android:text="17/30/2021"
-                    android:textSize="12dp" />
+                    android:textSize="12sp"
+                    tools:text="17/30/2021" />
             </LinearLayout>
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/hide"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/up" />
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:src="@drawable/up"
+                android:visibility="visible" />
+
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

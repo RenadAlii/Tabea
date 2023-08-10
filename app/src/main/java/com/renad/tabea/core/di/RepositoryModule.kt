@@ -1,7 +1,7 @@
 package com.renad.tabea.core.di
 
-import com.renad.tabea.domain.TaskRepository
 import com.renad.tabea.data.TaskRepositoryImp
+import com.renad.tabea.domain.TaskRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
