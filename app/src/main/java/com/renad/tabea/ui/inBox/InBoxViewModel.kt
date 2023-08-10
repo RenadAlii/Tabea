@@ -7,6 +7,7 @@ import com.renad.tabea.core.util.Dispatcher
 import com.renad.tabea.core.util.Response
 import com.renad.tabea.core.util.SingleEvent
 import com.renad.tabea.domain.model.SortType
+import com.renad.tabea.domain.model.Task
 import com.renad.tabea.domain.usecase.InBoxScreenUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -40,14 +41,10 @@ class InBoxViewModel @Inject constructor(
     fun onEvent(event: InBoxEvent) {
         when (event) {
             is InBoxEvent.CompleteTask -> completeTask(event.taskId, event.completed)
-            InBoxEvent.DeleteAllTasks -> deleteAllTasks()
-            is InBoxEvent.DeleteTask -> deleteTask(event.taskId)
+            is InBoxEvent.DeleteTask -> deleteTask(event.task)
             is InBoxEvent.SortTasks -> loadTaskList(event.sortType)
+            InBoxEvent.DeleteTasks -> deleteAllTasks(uiState.value.tasks ?: emptyList())
         }
-    }
-
-    init {
-        loadTaskList()
     }
 
     private fun completeTask(taskId: Int, completed: Boolean) {
@@ -60,7 +57,7 @@ class InBoxViewModel @Inject constructor(
             .flowOn(dispatcher.io).launchIn(viewModelScope)
     }
 
-    private fun loadTaskList(sortBy: SortType = SortType.ASC) {
+    fun loadTaskList(sortBy: SortType = SortType.ASC) {
         taskListJop?.cancel()
         taskListJop = loadTasksListFlow(sortBy)
             .flowOn(dispatcher.io)
@@ -68,11 +65,11 @@ class InBoxViewModel @Inject constructor(
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private fun deleteTask(taskId: Int) {
+    private fun deleteTask(task: Task) {
         if (deleteTaskJob?.isActive == true) {
             deleteTaskJob?.cancel()
         }
-        deleteTaskJob = useCases.deleteTaskUseCase.invoke(taskId).onStart {
+        deleteTaskJob = useCases.deleteTaskUseCase.invoke(task).onStart {
             _uiState.update { it.copy(isLoading = true) }
         }.flatMapLatest { loadTasksListFlow() }
             .onEach { _uiState.update { it.copy(isLoading = false) } }
@@ -107,11 +104,11 @@ class InBoxViewModel @Inject constructor(
         }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private fun deleteAllTasks() {
+    private fun deleteAllTasks(tasks: List<Task>) {
         if (deleteAllTasksJob?.isActive == true) {
             deleteAllTasksJob?.cancel()
         }
-        deleteAllTasksJob = useCases.deleteAllTasksUseCase.invoke().onStart {
+        deleteAllTasksJob = useCases.deleteTasksUseCase.invoke(tasks).onStart {
             _uiState.update { it.copy(isLoading = true) }
         }.flatMapLatest { loadTasksListFlow() }
             .onEach { _uiState.update { it.copy(isLoading = false) } }

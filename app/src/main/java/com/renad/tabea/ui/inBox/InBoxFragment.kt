@@ -42,6 +42,7 @@ class InBoxFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.loadTaskList()
         bindMenu()
         initViews()
         observeState()
@@ -97,9 +98,10 @@ class InBoxFragment : Fragment() {
     }
 
     private fun renderUiState(state: TasksUiState) = with(state) {
-        binding.bindUi(tasksStatus)
-        if (tasks.isNotEmpty()) handelTasksLayout(tasks) else handelLayoutVisibility(showTasks = false)
         binding.showProgress(isLoading)
+        binding.bindUi(tasksStatus)
+        if (tasks?.isNotEmpty() == true) handelTasksLayout(tasks)
+        if (tasks?.isEmpty() == true) handelLayoutVisibility(showTasks = false)
         errorMsg?.handel { showToast(it) }
     }
 
@@ -139,19 +141,19 @@ class InBoxFragment : Fragment() {
         task.id?.let { viewModel.onEvent(InBoxEvent.CompleteTask(it, task.isCompleted)) }
     }
 
-    private fun onShowPopupMenu(taskId: Int, rootView: View) {
+    private fun onShowPopupMenu(task: Task, rootView: View) {
         val popupMenu = PopupMenu(context, rootView)
         popupMenu.menuInflater.inflate(R.menu.pop_menu, popupMenu.menu)
         // set the menu item action
         popupMenu.setOnMenuItemClickListener { item: MenuItem? ->
             when (item?.itemId) {
                 R.id.menu_edit_todo -> {
-                    navigateToUpsertTaskFragment(taskId.toString())
+                    navigateToUpsertTaskFragment(task.id.toString())
                     true
                 }
 
                 else -> {
-                    viewModel.onEvent(InBoxEvent.DeleteTask(taskId))
+                    viewModel.onEvent(InBoxEvent.DeleteTask(task))
                     true
                 }
             }
@@ -172,7 +174,7 @@ class InBoxFragment : Fragment() {
             .setNegativeButton(getString(R.string.cancel)) { _, _ ->
             }
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
-                viewModel.onEvent(InBoxEvent.DeleteAllTasks)
+                viewModel.onEvent(InBoxEvent.DeleteTasks)
             }
             .show()
     }

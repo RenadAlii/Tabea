@@ -13,14 +13,14 @@ import com.renad.tabea.domain.model.Task
  * add task
  */
 sealed class InBoxEvent {
-    object DeleteAllTasks : InBoxEvent()
     data class CompleteTask(val taskId: Int, val completed: Boolean) : InBoxEvent()
-    data class DeleteTask(val taskId: Int) : InBoxEvent()
+    data class DeleteTask(val task: Task) : InBoxEvent()
+    object DeleteTasks : InBoxEvent()
     data class SortTasks(val sortType: SortType) : InBoxEvent()
 }
 
 data class TasksUiState(
-    val tasks: List<Task> = emptyList(),
+    val tasks: List<Task>? = null,
     val showEmptyTaskView: Boolean = false,
     val errorMsg: SingleEvent<Int>? = null,
     val isLoading: Boolean = true,

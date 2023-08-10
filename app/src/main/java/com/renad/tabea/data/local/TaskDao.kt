@@ -80,19 +80,11 @@ interface TaskDao {
      * Delete task.
      */
     @Delete
-    suspend fun delete(task: LocalTask)
+    suspend fun delete(vararg task: LocalTask)
 
     /**
      * Delete a task by id.
      */
     @Query("DELETE FROM task WHERE id = :taskId")
     suspend fun deleteById(taskId: Int)
-
-    /**
-     * Delete all tasks.
-     */
-    @Query("DELETE FROM task")
-    suspend fun deleteAll()
-//    @Delete
-//    suspend fun deleteAll()
 }

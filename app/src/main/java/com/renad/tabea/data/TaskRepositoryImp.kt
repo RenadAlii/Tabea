@@ -3,6 +3,7 @@ package com.renad.tabea.data
 import com.renad.tabea.R
 import com.renad.tabea.core.util.Dispatcher
 import com.renad.tabea.core.util.Response
+import com.renad.tabea.data.local.LocalTask
 import com.renad.tabea.data.local.TaskDao
 import com.renad.tabea.domain.TaskRepository
 import com.renad.tabea.domain.model.SortType
@@ -52,16 +53,12 @@ class TaskRepositoryImp @Inject constructor(
         localDataSource.updateCompleted(taskId, completed)
     }.flowOn(dispatcher.io)
 
-    override fun delete(task: Task) = flowCall {
-        localDataSource.delete(task.toLocal())
+    override fun delete(vararg task: LocalTask): Flow<Response<Unit>> = flowCall {
+        localDataSource.delete(*task)
     }.flowOn(dispatcher.io)
 
     override fun deleteById(taskId: Int) = flowCall {
         localDataSource.deleteById(taskId)
-    }.flowOn(dispatcher.io)
-
-    override fun deleteAll() = flowCall {
-        localDataSource.deleteAll()
     }.flowOn(dispatcher.io)
 }
 

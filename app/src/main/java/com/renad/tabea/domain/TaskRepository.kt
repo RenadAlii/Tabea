@@ -1,6 +1,7 @@
 package com.renad.tabea.domain
 
 import com.renad.tabea.core.util.Response
+import com.renad.tabea.data.local.LocalTask
 import com.renad.tabea.domain.model.SortType
 import com.renad.tabea.domain.model.Task
 import kotlinx.coroutines.flow.Flow
@@ -19,9 +20,7 @@ interface TaskRepository {
 
     fun updateCompleted(taskId: Int, completed: Boolean): Flow<Response<Unit>>
 
-    fun delete(task: Task): Flow<Response<Unit>>
+    fun delete(vararg task: LocalTask): Flow<Response<Unit>>
 
     fun deleteById(taskId: Int): Flow<Response<Unit>>
-
-    fun deleteAll(): Flow<Response<Unit>>
 }

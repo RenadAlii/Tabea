@@ -16,7 +16,7 @@ import com.renad.tabea.domain.model.Task
 class InBoxAdapter(
     val onItemClicked: (String) -> Unit,
     val onTaskChecked: (Task) -> Unit,
-    val showPopupMenu: (Int, View) -> Unit,
+    val showPopupMenu: (Task, View) -> Unit,
 ) : ListAdapter<Task, InBoxAdapter.ItemViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -59,7 +59,7 @@ class InBoxAdapter(
 
                 // show the menu on the Icon
                 ellipsisImageButton.setOnClickListener {
-                    todo.id?.let { id -> showPopupMenu(id, it) }
+                    showPopupMenu(todo, it)
                 }
 
                 card.setOnClickListener {

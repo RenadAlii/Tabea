@@ -13,6 +13,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/side_margin"
         android:scrollbars="vertical"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +37,7 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:gravity="center"
+            android:visibility="gone"
             android:text="@string/ready_for_some_new_tasks_tap_plus_to_write_them_down"
             android:textSize="20sp" />
     </LinearLayout>
@@ -49,6 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
+        app:lottie_speed="4"
         android:visibility="gone"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/progress" />
