@@ -21,7 +21,6 @@ fun Task.toLocal() =
         task = task,
         details = details,
         isCompleted = isCompleted,
-        time = time,
         date = date,
     )
 
@@ -33,7 +32,6 @@ fun LocalTask.toExternal() = Task(
     task = task,
     details = details,
     isCompleted = isCompleted,
-    time = time,
     date = date,
 )
 

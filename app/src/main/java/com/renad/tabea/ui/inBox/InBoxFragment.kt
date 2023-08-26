@@ -70,12 +70,6 @@ class InBoxFragment : Fragment() {
                     sendSortTaskEvent(SortType.DATE)
                     true
                 }
-
-                R.id.sortByTime -> {
-                    sendSortTaskEvent(SortType.TIME)
-                    true
-                }
-
                 else -> {
                     NavigationUI.onNavDestinationSelected(
                         it,

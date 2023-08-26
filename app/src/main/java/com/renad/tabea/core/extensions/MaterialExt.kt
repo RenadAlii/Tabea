@@ -38,10 +38,13 @@ fun Fragment.showTimePicker(clickAction: (isCancel: Boolean, time: String) -> Un
         .setTimeFormat(clockFormat)
         .setTitleText(getString(R.string.select_time))
         .setHour(12)
+        .setMinute(0)
         .setInputMode(INPUT_MODE_KEYBOARD).build()
 
     timePicker.addOnPositiveButtonClickListener {
-        clickAction(false, "${timePicker.hour}:${timePicker.minute}")
+        clickAction(false,
+            "${timePicker.hour}:" +
+                    "${timePicker.minute}")
     }
     timePicker.addOnNegativeButtonClickListener { clickAction(true, "") }
     timePicker.show(parentFragmentManager, "")

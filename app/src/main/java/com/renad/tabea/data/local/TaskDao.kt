@@ -43,13 +43,6 @@ interface TaskDao {
     suspend fun getTasksByDate(taskDate: String): List<LocalTask>
 
     /**
-     * get task by time
-     * @param taskTime time of the task
-     */
-    @Query("SELECT * from task WHERE time = :taskTime")
-    suspend fun getTasksByTime(taskTime: String): List<LocalTask>
-
-    /**
      * get task by id
      * @param taskId id of the task
      */

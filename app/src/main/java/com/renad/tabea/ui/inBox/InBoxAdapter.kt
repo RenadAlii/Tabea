@@ -39,7 +39,6 @@ class InBoxAdapter(
             binding.apply {
                 todoTaskText.text = todo.task
                 dateText.text = todo.date?.getDate()?.let { DateUtil.dateFormatter().format(it) }
-                timeText.text = todo.time
                 details.text = todo.details
                 todocheckbox.isChecked = todo.isCompleted
 

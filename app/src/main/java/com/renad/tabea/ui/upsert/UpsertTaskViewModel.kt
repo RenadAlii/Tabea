@@ -56,7 +56,7 @@ class UpsertTaskViewModel @Inject constructor(
         taskRepository.getTaskById(taskId!!).map { task ->
             when (task) {
                 Response.Loading -> {
-                    _uiState.update { it.copy(isLoading = true) }
+                    showLoading()
                 }
 
                 is Response.Failure -> {
@@ -75,7 +75,6 @@ class UpsertTaskViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             task = taskDetails?.task ?: "",
-                            time = taskDetails?.time,
                             date = taskDate?.getDate()
                                 ?.let { stringDate -> DateUtil.dateFormatter().format(stringDate) },
                             isLoading = false,
@@ -99,47 +98,67 @@ class UpsertTaskViewModel @Inject constructor(
             is UpsertTaskEvent.HideDatePicker -> {
                 if (!event.isCancel) {
                     _date.update { event.date }
-                    _uiState.update {
-                        it.copy(
-                            date = DateUtil.dateFormatter().format(event.date?.getDate()!!),
-                        )
-                    }
                 }
-            }
-
-            is UpsertTaskEvent.HideTimePicker -> {
                 _uiState.update {
                     it.copy(
-                        time = if (!event.isCancel) event.time else it.time,
+                        date = if (!event.isCancel) {
+                            DateUtil.dateFormatter()
+                                .format(event.date?.getDate()!!)
+                        } else {
+                            it.date
+                        },
+                        showDatePicker = null,
                     )
-                }
-            }
-
-            UpsertTaskEvent.ShowTimePicker -> {
-                _uiState.update {
-                    it.copy(showTimePicker = SingleEvent(Unit))
                 }
             }
 
             is UpsertTaskEvent.EditTask -> {
                 _uiState.update {
-                    it.copy(task = event.task, description = event.taskDescription)
+                    it.copy(task = event.task)
                 }
-                editTaskInfo()
+            }
+
+            is UpsertTaskEvent.EditDescription -> _uiState.update {
+                it.copy(description = event.taskDescription)
+            }
+
+            UpsertTaskEvent.SaveText -> {
+                showLoading()
+                validateTaskInfo()
             }
         }
     }
 
-    private fun editTaskInfo() = with(uiState.value) {
+    private fun showLoading() {
+        _uiState.update {
+            it.copy(
+                isLoading = true,
+            )
+        }
+    }
+
+    private fun validateTaskInfo() {
+        if (uiState.value.task.isNotBlank()) {
+            saveTaskInfo()
+        } else {
+            _uiState.update {
+                it.copy(
+                    errorMsg = SingleEvent(R.string.empty_task_msg),
+                    isLoading = false,
+                )
+            }
+        }
+    }
+
+    private fun saveTaskInfo() = with(uiState.value) {
         taskRepository.upsert(
             Task(
                 id = taskId,
                 task = task,
                 details = description,
-                time = time,
                 date = _date.value,
             ),
-        ).onStart { _uiState.update { it.copy(isLoading = true) } }.map { response ->
+        ).onStart { showLoading() }.map { response ->
             when (response) {
                 is Response.Failure -> _uiState.update {
                     it.copy(
@@ -160,10 +179,4 @@ class UpsertTaskViewModel @Inject constructor(
             }
         }.flowOn(dispatcher.io).launchIn(viewModelScope)
     }
-
-    // fun to check if the data is not null
-    fun isValidTask(todoText: String): Boolean =
-        isTodoTaskNotEmpty(todoText)
-
-    private fun isTodoTaskNotEmpty(todoText: String): Boolean = todoText != ""
 }

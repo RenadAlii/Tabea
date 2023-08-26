@@ -8,7 +8,6 @@ data class Task(
     val id: Int?,
     val task: String,
     val details: String?,
-    val time: String?,
     val date: Long?,
     var isCompleted: Boolean = false,
 ) {
@@ -16,10 +15,9 @@ data class Task(
     val isDateEmpty get() = (date == null)
     val isTaskDueToday get() = date?.getDate()?.compareTo(DateUtil.dateOfToday()) == 0
     val isTaskDayPast get() = date?.getDate()?.before(DateUtil.dateOfToday()) == true
-    val isTaskTimePast get() = DateUtil.currentTime()?.after(time?.getTime()) == true
     val taskState: TaskState
         get() = if (!isCompleted) {
-            if (isTaskDayPast || isTaskDueToday && isTaskTimePast) {
+            if (isTaskDayPast || isTaskDueToday) {
                 TaskState.MISS
             } else {
                 TaskState.ACTIVE

@@ -57,7 +57,6 @@ class GetTasksUseCase @Inject constructor(
     ) =
         when (sortBy) {
             SortType.DATE -> tasks?.sortedBy { task -> task.date?.getDate() }
-            SortType.TIME -> tasks?.sortedByDescending { task -> task.time?.getTime() }
             else -> tasks
         }
 }
