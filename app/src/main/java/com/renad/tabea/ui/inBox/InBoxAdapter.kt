@@ -3,7 +3,6 @@ package com.renad.tabea.ui.inBox
 import android.graphics.Paint
 import android.view.*
 import android.widget.*
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -37,27 +36,13 @@ class InBoxAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(todo: Task) {
             binding.apply {
-                todoTaskText.text = todo.task
-                dateText.text = todo.date?.getDate()?.let { DateUtil.dateFormatter().format(it) }
-                details.text = todo.details
-                todocheckbox.isChecked = todo.isCompleted
-
-                // expand the layout or unexpanded
-                expand.setOnClickListener {
-                    if (layoutExpand.isGone) {
-                        layoutExpand.visibility = View.VISIBLE
-                        expand.visibility = View.INVISIBLE
-                    }
-                    hide.setOnClickListener {
-                        if (layoutExpand.isVisible) {
-                            layoutExpand.visibility = View.GONE
-                            expand.visibility = View.VISIBLE
-                        }
-                    }
-                }
+                taskText.text = todo.task
+                bindDateText(todo.date?.getDate()?.let { DateUtil.dateFormatter().format(it) })
+                bindDetails(todo.details)
+                handelCompleteState(todo.isCompleted)
 
                 // show the menu on the Icon
-                ellipsisImageButton.setOnClickListener {
+                ellipsisIcon.setOnClickListener {
                     showPopupMenu(todo, it)
                 }
 
@@ -65,32 +50,37 @@ class InBoxAdapter(
                     todo.id?.let { onItemClicked(it.toString()) }
                 }
 
-                // add lineThrough TodoTask when CheckBox Checked or remove line
-                todocheckbox.setOnCheckedChangeListener { _, isChecked ->
+                taskCheckbox.setOnCheckedChangeListener { _, isChecked ->
                     onTaskChecked(todo)
-                    makeLineThroughTask(todoTaskText, isChecked)
-                }
-
-                // add lineThrough TodoTask if it's Completed
-                if (todo.isCompleted) {
-                    todoTaskText.paintFlags = todoTaskText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                    todocheckbox.isChecked = todocheckbox.isChecked
-                }
-
-                // expand the layout or unexpanded
-                expand.setOnClickListener {
-                    if (layoutExpand.isGone) {
-                        layoutExpand.visibility = View.VISIBLE
-                        expand.visibility = View.INVISIBLE
-                    }
-                    hide.setOnClickListener {
-                        if (layoutExpand.isVisible) {
-                            layoutExpand.visibility = View.GONE
-                            expand.visibility = View.VISIBLE
-                        }
-                    }
+                    handelCompleteState(isChecked)
                 }
             }
+        }
+
+        private fun TaskItemBinding.bindDateText(date: String?) {
+            if (date != null) {
+                dateText.text = date
+            } else {
+                dateText.isVisible = false
+                calenderIcon.isVisible = false
+                divider.isVisible = false
+            }
+        }
+
+        private fun TaskItemBinding.bindDetails(text: String?) {
+            if (text.isNullOrEmpty()) {
+                details.isVisible = false
+            } else {
+                details.text = text
+            }
+        }
+
+        // add lineThrough when CheckBox Checked or remove line.
+        private fun TaskItemBinding.handelCompleteState(isCompleted: Boolean) {
+            makeLineThroughTask(taskText, isCompleted)
+            makeLineThroughTask(details, isCompleted)
+            makeLineThroughTask(dateText, isCompleted)
+            taskCheckbox.isChecked = isCompleted
         }
 
         // fun to make LineThrough Task & disEnable CheckBox when task is completed
