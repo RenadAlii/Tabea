@@ -27,5 +27,13 @@
         <item name="android:textColor">@color/yellow_400</item>
     </style>
 
+    <style name="Theme.App" parent="ThemeOverlay.Material3.AutoCompleteTextView">
+        <item name="colorPrimary">#00F1D96A</item>
+        <item name="colorOnSurface">@color/yellow_400</item>
+        <item name="textAppearanceSubtitle1">@color/yellow_400</item>
+        <item name="textAppearanceCaption">@color/yellow_400</item>
+    </style>
+
+
 
 </resources>

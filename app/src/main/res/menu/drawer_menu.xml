@@ -1,35 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/inboxfragment"
-        android:title="@string/inbox"
+        android:id="@+id/inBoxFragment"
         android:icon="@drawable/ic_baseline_inbox_24"
-       />
+        android:title="@string/inbox" />
 
     <item
         android:id="@+id/todayTaskFragment"
-        android:title="@string/today"
-        android:icon="@drawable/ic_baseline_calendar_today_24">
-
-    </item>
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="@string/today" />
 
     <item
         android:id="@+id/completedTaskFragment"
-        android:title="@string/completed_task"
-        android:icon="@drawable/check">
-
-    </item>
+        android:icon="@drawable/check"
+        android:title="@string/completed_task" />
 
 
     <item
         android:id="@+id/wontDoFragment"
-        android:title="@string/won_t_do"
-        android:icon="@drawable/cancel_button">
-
-    </item>
-
+        android:icon="@drawable/cancel_button"
+        android:title="@string/won_t_do" />
 
 
 </menu>
